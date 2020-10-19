@@ -1,0 +1,17 @@
+$s-roundness: 0.25em !default;
+$s-padding: 1em !default;
+
+$s-primary-color: #2288ff !default;
+$s-primary-color-text: white !default;
+
+$s-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+	Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+
+$s-form-padding: 0.5em !default;
+$s-form-font-size: 1em !default;
+$s-form-border: 1px solid currentColor !default;
+$s-form-roundness: $s-roundness;
+
+$s-transition-time: 0.23s !default;
+$s-transition-bezier: ease-in-out !default;
+$s-transition: $s-transition-time $s-transition-bezier !default;

@@ -1,0 +1,35 @@
+:root {
+	--color-black: #111111;
+	--color-white: white;
+	--color-dark: #222222;
+	--color-light: #f7f7f7;
+}
+@mixin darkMode {
+	--html-background: var(--color-black);
+	--body-background: var(--color-black);
+	--body-text-color: var(--color-white);
+	--content-background: var(--color-dark);
+	--content-text-color: var(--color-white);
+}
+@mixin lightMode {
+	--html-background: var(--color-black);
+	--body-background: var(--color-light);
+	--body-text-color: var(--color-dark);
+	--content-background: var(--color-white);
+	--content-text-color: var(--color-dark);
+}
+:root {
+	--color-mode: 'light';
+	@include lightMode;
+}
+[data-user-color-scheme='dark'] {
+	@include darkMode;
+}
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-mode: 'dark';
+	}
+	:root:not([data-user-color-scheme]) {
+		@include darkMode;
+	}
+}
