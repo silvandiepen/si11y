@@ -4,6 +4,7 @@
 			:id="uid"
 			class="s-toggle__control"
 			type="checkbox"
+
 			v-model="isChecked"
 			v-bind="$attrs"
 		/>
@@ -37,14 +38,6 @@ export default defineComponent({
 		}
 	},
 	setup(props, { emit }) {
-		// const state = reactive({
-		// 	dirty: false,
-		// 	focus: false,
-		// 	empty: true,
-		// 	uid: new Date().getTime() + Math.random(),
-		// 	checked: false
-		// });
-
 		const dirty = ref(false);
 		const focus = ref(false);
 
@@ -96,8 +89,8 @@ $block: '.s-toggle';
 			&::after,
 			&::before {
 				content: '';
-				width: 1.5em;
-				height: 1.5em;
+				width: 1.25em;
+				height: 1.25em;
 
 				position: absolute;
 				left: 0;
@@ -122,10 +115,11 @@ $block: '.s-toggle';
 		#{$block}__control {
 			&:checked + #{$block}__label {
 				&::before {
+					background-color: var(--primary-color, $s-primary-color);
 					border: 1px solid var(--primary-color, $s-primary-color);
 				}
 				&::after {
-					transform: translateY(-75%) translateX(calc(-50% - 1px))
+					transform: translateY(-75%) translateX(calc(-50% - 3px))
 						rotate(-45deg) scale(1);
 				}
 			}
@@ -176,6 +170,7 @@ $block: '.s-toggle';
 		#{$block}__control {
 			&:checked + #{$block}__label {
 				&::before {
+					background-color: var(--primary-color, $s-primary-color);
 					border: 1px solid var(--primary-color, $s-primary-color);
 				}
 				&::after {
