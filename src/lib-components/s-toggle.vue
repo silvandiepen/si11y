@@ -8,9 +8,9 @@
 			v-bind="$attrs"
 			@change="setChecked"
 		/>
-		<label :for="state.uid" class="s-toggle__label"
-			>{{ label }} {{ state.checked }}</label
-		>
+		<label :for="state.uid" class="s-toggle__label">
+			<span class="s-toggle__text">{{ label }} {{ state.checked }}</span>
+		</label>
 	</div>
 </template>
 <script lang="ts">
@@ -48,6 +48,9 @@ export default defineComponent({
 		const setChecked = ($event: any) => {
 			state.checked = $event.target.checked;
 			emit('update:checked', $event.target.checked);
+			emit('checked', $event.target.checked);
+			emit('input', $event.target.checked);
+			console.log('set checked to', $event.target.checked);
 		};
 
 		return {
@@ -57,7 +60,7 @@ export default defineComponent({
 			setChecked,
 			setFocusStatus,
 			setInputStatus,
-			label: props.label,
+			label: props.label
 			isChecked: useModelWrapper(props, emit, 'checked')
 		};
 	}

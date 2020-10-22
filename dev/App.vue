@@ -6,7 +6,8 @@
 			<SNavigation :menu="state.menu" autoHide />
 		</template>
 		<template #right>
-			<SToggle label="darkmode" type="switch" v-model:checked="darkMode" />
+			<SToggle label="darkmode" type="switch" v-model="darkMode" />
+			{{ darkMode }}
 		</template>
 	</SHeader>
 	<h1>Test</h1>
@@ -18,7 +19,7 @@
 
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
 import useColorMode from './useColorMode';
 
 import {
@@ -32,7 +33,7 @@ import {
 } from '../src/entry.esm';
 
 export default defineComponent({
-	name: 'ServeDev',
+	name: 'App',
 	components: {
 		SButton,
 		SButtonGroup,
@@ -44,7 +45,6 @@ export default defineComponent({
 	},
 	setup() {
 		const { darkMode } = useColorMode();
-		console.log(`darkmode:`, darkMode);
 
 		const state = reactive({
 			page: 'forms',
@@ -86,7 +86,6 @@ export default defineComponent({
 	font-size: 2em;
 	font-family: 'bitter';
 	span {
-		// font-family: monospace;
 		color: var(--primary-color, $s-primary-color);
 	}
 }

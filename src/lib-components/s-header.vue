@@ -1,19 +1,19 @@
 <template>
 	<header class="s-header">
-		<div class="s-header__left">
+		<div class="s-header__left" v-if="hasSlot.left">
 			<slot name="left"></slot>
 		</div>
-		<div class="s-header__middle">
+		<div class="s-header__middle" v-if="hasSlot.middle">
 			<slot name="middle"></slot>
 		</div>
-		<div class="s-header__right">
+		<div class="s-header__right" v-if="hasSlot.right">
 			<slot name="right"></slot>
 		</div>
 	</header>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from 'vue';
+import { defineComponent, reactive } from 'vue';
 export default defineComponent({
 	name: 'SHeader', // vue component name
 	props: {
@@ -27,19 +27,16 @@ export default defineComponent({
 		if (props.autoHide) {
 			console.log('yes, this should autohide');
 		}
-		const state = reactive({
-			hasLeftSlot: computed(() => {
-				return !!context.slots['left'];
-			}),
-			hasMiddleSlot: computed(() => {
-				return !!context.slots['middle'];
-			}),
-			hasRightSlot: computed(() => {
-				return !!context.slots['left'];
-			})
+
+		const { left, middle, right } = context.slots;
+
+		const hasSlot = reactive({
+			left: left ? !!left() : false,
+			middle: middle ? !!middle() : false,
+			right: right ? !!right() : false
 		});
 
-		return { state };
+		return { hasSlot };
 	}
 });
 </script>
