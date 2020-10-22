@@ -1,3 +1,5 @@
-export { default as Buttons } from './buttons.vue';
-export { default as Forms } from './forms.vue';
-export { default as Contents } from './contents.vue';
+export { default as ButtonsView } from './buttons.vue';
+export { default as FormsView } from './forms.vue';
+export { default as ContentsView } from './contents.vue';
+export { default as HomeView } from './home.vue';
+export { default as NavigationView } from './navigation.vue';

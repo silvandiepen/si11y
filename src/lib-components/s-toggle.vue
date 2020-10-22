@@ -6,9 +6,11 @@
 			type="checkbox"
 			:checked="checked"
 			v-bind="$attrs"
-			@change="$emit('update:checked', $event.target.checked)"
+			@change="setChecked"
 		/>
-		<label :for="state.uid" class="s-toggle__label">{{ label }}</label>
+		<label :for="state.uid" class="s-toggle__label"
+			>{{ label }} {{ state.checked }}</label
+		>
 	</div>
 </template>
 <script lang="ts">
@@ -39,13 +41,20 @@ export default defineComponent({
 			dirty: false,
 			focus: false,
 			empty: true,
-			uid: new Date().getTime() + Math.random()
+			uid: new Date().getTime() + Math.random(),
+			checked: false
 		});
+
+		const setChecked = ($event: any) => {
+			state.checked = $event.target.checked;
+			emit('update:checked', $event.target.checked);
+		};
 
 		return {
 			inputType,
 			props,
 			state,
+			setChecked,
 			setFocusStatus,
 			setInputStatus,
 			label: props.label,
@@ -106,6 +115,13 @@ $block: '.s-toggle';
 						rotate(-45deg) scale(1);
 				}
 			}
+			&:focus + #{$block}__label {
+				&::before {
+					border: 1px solid var(--primary-color, $s-primary-color);
+					box-shadow: 0 0 0 var(--form-highlight-size, $s-form-highlight-size)
+						var(--form-highlight-color, $s-form-highlight-color);
+				}
+			}
 		}
 	}
 	&--switch {
@@ -152,10 +168,16 @@ $block: '.s-toggle';
 					transform: translateY(-50%) translateX(calc(100% - 4px));
 				}
 			}
+			&:focus + #{$block}__label {
+				&::before {
+					border: 1px solid var(--primary-color, $s-primary-color);
+					box-shadow: 0 0 0 var(--form-highlight-size, $s-form-highlight-size)
+						var(--form-highlight-color, $s-form-highlight-color);
+				}
+			}
 		}
 	}
 	#{$block}__control {
-		visibility: hidden;
 		width: 0;
 		height: 0;
 		position: absolute;

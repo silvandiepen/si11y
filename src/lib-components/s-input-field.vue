@@ -115,7 +115,8 @@ export default defineComponent({
 		&:focus {
 			outline: none;
 			border-color: var(--primary-color, $s-primary-color);
-			box-shadow: 0 0 0.5em 0em var(--primary-color, $s-primary-color);
+			box-shadow: 0 0 0 var(--form-highlight-size, $s-form-highlight-size)
+				var(--form-highlight-color, $s-form-highlight-color);
 			opacity: 1;
 		}
 	}

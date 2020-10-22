@@ -38,6 +38,9 @@ export default defineComponent({
 
 .s-button-group {
 	display: flex;
+	.s-button {
+		margin: 0;
+	}
 	&--center {
 		justify-content: center;
 		align-items: center;
@@ -52,12 +55,16 @@ export default defineComponent({
 	}
 	&--horizontal {
 		flex-direction: row;
+
+		& > .s-button + .s-button,
 		& > * + * {
+			margin-top: 0;
 			margin-left: 1em;
 		}
 	}
 	&--vertical {
 		flex-direction: column;
+		& > .s-button + .s-button,
 		& > * + * {
 			margin-top: 1em;
 		}

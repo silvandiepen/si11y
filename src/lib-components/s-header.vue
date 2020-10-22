@@ -23,7 +23,7 @@ export default defineComponent({
 		}
 	},
 	setup(props, context) {
-		console.log(context.slots.left, context.slots['left']);
+		// console.log(context.slots.left, context.slots['left']);
 		if (props.autoHide) {
 			console.log('yes, this should autohide');
 		}

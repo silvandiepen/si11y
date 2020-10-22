@@ -22,7 +22,7 @@ export default defineComponent({
 	},
 
 	setup(props) {
-		console.log(props.menu);
+		// console.log(props.menu);
 		return { menu: props.menu };
 	}
 });
