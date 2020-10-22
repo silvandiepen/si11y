@@ -19,7 +19,7 @@
 
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import useColorMode from './useColorMode';
 
 import {

@@ -4,12 +4,13 @@
 			:id="state.uid"
 			class="s-toggle__control"
 			type="checkbox"
-			:checked="checked"
+			:checked="isChecked"
+			v-model="isChecked"
 			v-bind="$attrs"
-			@change="setChecked"
+			@change="isChecked"
 		/>
 		<label :for="state.uid" class="s-toggle__label">
-			<span class="s-toggle__text">{{ label }} {{ state.checked }}</span>
+			<span class="s-toggle__text">{{ label }} {{ isChecked }}</span>
 		</label>
 	</div>
 </template>
@@ -35,32 +36,19 @@ export default defineComponent({
 		}
 	},
 	setup(props, { emit }) {
-		const inputType = props.type;
-
 		const state = reactive({
 			dirty: false,
 			focus: false,
 			empty: true,
-			uid: new Date().getTime() + Math.random(),
-			checked: false
+			uid: new Date().getTime() + Math.random()
 		});
 
-		const setChecked = ($event: any) => {
-			state.checked = $event.target.checked;
-			emit('update:checked', $event.target.checked);
-			emit('checked', $event.target.checked);
-			emit('input', $event.target.checked);
-			console.log('set checked to', $event.target.checked);
-		};
-
 		return {
-			inputType,
 			props,
 			state,
-			setChecked,
 			setFocusStatus,
 			setInputStatus,
-			label: props.label
+			label: props.label,
 			isChecked: useModelWrapper(props, emit, 'checked')
 		};
 	}
@@ -85,8 +73,8 @@ $block: '.s-toggle';
 			&::after,
 			&::before {
 				content: '';
-				width: 1.5em;
-				height: 1.5em;
+				width: 1.25em;
+				height: 1.25em;
 
 				position: absolute;
 				left: 0;
@@ -111,10 +99,11 @@ $block: '.s-toggle';
 		#{$block}__control {
 			&:checked + #{$block}__label {
 				&::before {
+					background-color: var(--primary-color, $s-primary-color);
 					border: 1px solid var(--primary-color, $s-primary-color);
 				}
 				&::after {
-					transform: translateY(-75%) translateX(calc(-50% - 1px))
+					transform: translateY(-75%) translateX(calc(-50% - 3px))
 						rotate(-45deg) scale(1);
 				}
 			}
@@ -165,6 +154,7 @@ $block: '.s-toggle';
 		#{$block}__control {
 			&:checked + #{$block}__label {
 				&::before {
+					background-color: var(--primary-color, $s-primary-color);
 					border: 1px solid var(--primary-color, $s-primary-color);
 				}
 				&::after {
