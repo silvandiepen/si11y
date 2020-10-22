@@ -1,22 +1,20 @@
 <template>
-	<div class="s-toggle" :class="`s-toggle--${props.type}`">
+	<div class="s-toggle" :class="`s-toggle--${type}`">
 		<input
-			:id="state.uid"
+			:id="uid"
 			class="s-toggle__control"
 			type="checkbox"
-			:checked="checked"
+			v-model="isChecked"
 			v-bind="$attrs"
-			@change="setChecked"
 		/>
-		<label :for="state.uid" class="s-toggle__label">
-			<span class="s-toggle__text">{{ label }} {{ state.checked }}</span>
+		<label :for="uid" class="s-toggle__label">
+			<span class="s-toggle__text">{{ label }}</span>
 		</label>
 	</div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
-import { setFocusStatus, setInputStatus } from './set-utils';
-import { useModelWrapper } from './modelWrapper';
+import { defineComponent, computed, ref } from 'vue';
+// import { useModelWrapper } from './modelWrapper';
 
 export default defineComponent({
 	name: 'SToggle', // vue component name
@@ -29,39 +27,52 @@ export default defineComponent({
 			type: String,
 			default: ''
 		},
-		checked: {
+		modelValue: {
 			type: Boolean,
 			default: false
+		},
+		uid: {
+			type: String,
+			default: 'input'
 		}
 	},
 	setup(props, { emit }) {
-		const inputType = props.type;
+		// const state = reactive({
+		// 	dirty: false,
+		// 	focus: false,
+		// 	empty: true,
+		// 	uid: new Date().getTime() + Math.random(),
+		// 	checked: false
+		// });
 
-		const state = reactive({
-			dirty: false,
-			focus: false,
-			empty: true,
-			uid: new Date().getTime() + Math.random(),
-			checked: false
+		const dirty = ref(false);
+		const focus = ref(false);
+
+		const onFocus = () => (focus.value = true);
+		const onBlur = () => (focus.value = false);
+
+		// Get first value (most of the times this is modelValue)
+		// Exception if it's being used like this v-model:YourKey=""
+		// Then it will be props.YourKey
+		const value = props.modelValue;
+
+		const isChecked = computed({
+			get: () => value,
+			set: (newValue: boolean) => {
+				dirty.value = true;
+				emit('update:modelValue', newValue);
+			}
 		});
 
-		const setChecked = ($event: any) => {
-			state.checked = $event.target.checked;
-			emit('update:checked', $event.target.checked);
-			emit('checked', $event.target.checked);
-			emit('input', $event.target.checked);
-			console.log('set checked to', $event.target.checked);
-		};
+		// Above function is same as below but I added the dirty ref
+		// const isChecked = useModelWrapper(props, emit)
 
 		return {
-			inputType,
-			props,
-			state,
-			setChecked,
-			setFocusStatus,
-			setInputStatus,
-			label: props.label
-			isChecked: useModelWrapper(props, emit, 'checked')
+			isChecked,
+			onFocus,
+			onBlur,
+			dirty,
+			focus
 		};
 	}
 });

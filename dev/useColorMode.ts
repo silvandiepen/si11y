@@ -1,33 +1,24 @@
-import { watch, onMounted, reactive } from 'vue';
+import { watch, onMounted, ref, toRefs } from 'vue';
 
 export function useColorMode() {
-	const state = reactive({
-		isDark: false
-	});
+	const darkMode = ref(false);
 
 	onMounted(() => {
 		if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-			state.isDark = true;
+			darkMode.value = true;
 
 		// console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
 	});
 
-	watch(
-		() => state.isDark,
-		() => {
-			console.log('changing mode');
-			document.documentElement.setAttribute(
-				'data-user-color-scheme',
-				state.isDark ? 'dark' : 'light'
-			);
-		}
-	);
+	watch(darkMode, () => {
+		console.log('changing mode');
+		document.documentElement.setAttribute(
+			'data-user-color-scheme',
+			darkMode.value ? 'dark' : 'light'
+		);
+	});
 
-	return {
-		darkMode: state.isDark,
-		lightMode: !state.isDark,
-		mode: state.isDark ? 'dark' : 'light'
-	};
+	return darkMode;
 }
 
 export default useColorMode;
