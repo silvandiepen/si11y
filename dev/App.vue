@@ -1,4 +1,3 @@
-
 <template>
 	<SHeader>
 		<template #left> <span class="logo">si<span>11</span>y</span> </template>
@@ -7,7 +6,6 @@
 		</template>
 		<template #right>
 			<SToggle label="darkmode" type="switch" v-model="darkMode" />
-			{{ darkMode }}
 		</template>
 	</SHeader>
 	<h1>Test</h1>
@@ -16,7 +14,6 @@
 		<router-view />
 	</main>
 </template>
-
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
@@ -44,7 +41,7 @@ export default defineComponent({
 		SHeader
 	},
 	setup() {
-		const { darkMode } = useColorMode();
+		const darkMode = useColorMode();
 
 		const state = reactive({
 			page: 'forms',
@@ -75,7 +72,6 @@ export default defineComponent({
 	}
 });
 </script>
-
 
 <style lang="scss">
 @import '../src/style/index.scss';
