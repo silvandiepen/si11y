@@ -3,7 +3,7 @@
 	"version": "1.0.1",
 	"description": "Sil's Component Library",
 	"license": "MIT",
-	"main": "dist/silly.ssr.js",
+	"main": "dist/silly.min.js",
 	"browser": "dist/silly.esm.js",
 	"module": "dist/silly.esm.js",
 	"unpkg": "dist/silly.min.js",
