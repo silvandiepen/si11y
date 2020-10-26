@@ -227,11 +227,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.elementType), {
       type: _ctx.type,
       class: "s-input-text__control",
+      modelValue: _ctx.value,
+      "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => (_ctx.value = $event)),
       onFocus: _ctx.onFocus,
       onBlur: _ctx.onBlur,
       onInput: _ctx.onInput,
       id: _ctx.uid
-    }, null, 8, ["type", "onFocus", "onBlur", "onInput", "id"])),
+    }, null, 8, ["type", "modelValue", "onFocus", "onBlur", "onInput", "id"])),
     (_ctx.props.label)
       ? (vue.openBlock(), vue.createBlock("label", {
           key: 0,
@@ -309,11 +311,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.elementType), {
       type: _ctx.type,
       class: "s-input-text__control",
+      modelValue: _ctx.value,
+      "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => (_ctx.value = $event)),
       onFocus: _ctx.onFocus,
       onBlur: _ctx.onBlur,
       onInput: _ctx.onInput,
       id: _ctx.uid
-    }, null, 8, ["type", "onFocus", "onBlur", "onInput", "id"])),
+    }, null, 8, ["type", "modelValue", "onFocus", "onBlur", "onInput", "id"])),
     (_ctx.props.label)
       ? (vue.openBlock(), vue.createBlock("label", {
           key: 0,

@@ -13,6 +13,7 @@
 			:is="elementType"
 			:type="type"
 			class="s-input-text__control"
+			v-model="value"
 			@focus="onFocus"
 			@blur="onBlur"
 			@input="onInput"
