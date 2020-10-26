@@ -345,7 +345,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     };
   }
 });function render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return (vue.openBlock(), vue.createBlock("div", {
+  return (vue.openBlock(), vue.createBlock("form", {
     class: ["s-form", [
 			`s-form--${_ctx.props.align}`,
 			`s-form--${_ctx.props.direction}`,

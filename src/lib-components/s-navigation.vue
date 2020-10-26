@@ -70,6 +70,7 @@ export default defineComponent({
 	&__list {
 		display: flex;
 		justify-content: center;
+		align-items: center;
 	}
 	&__item {
 		position: relative;

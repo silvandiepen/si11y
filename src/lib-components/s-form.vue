@@ -1,5 +1,5 @@
 <template>
-	<div
+	<form
 		class="s-form"
 		:class="[
 			`s-form--${props.align}`,
@@ -8,7 +8,7 @@
 		]"
 	>
 		<slot :props="props"></slot>
-	</div>
+	</form>
 </template>
 
 <script lang="ts">

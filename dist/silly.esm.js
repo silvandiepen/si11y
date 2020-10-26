@@ -315,7 +315,7 @@ var script$4 = defineComponent({
 });
 
 function render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createBlock("div", {
+  return (openBlock(), createBlock("form", {
     class: ["s-form", [
 			`s-form--${_ctx.props.align}`,
 			`s-form--${_ctx.props.direction}`,
