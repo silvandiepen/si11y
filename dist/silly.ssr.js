@@ -441,7 +441,8 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
   },
   setup: function setup(props) {
     var getElementType = function getElementType(item) {
-      var elementType = 'a';
+      var elementType = 'a'; // if (item.to) elementType = 'route-link';
+
       if (item.click) elementType = 'button';
       if (item.element) elementType = item.element;
       return elementType;
@@ -454,8 +455,14 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
   }
 });const _hoisted_1$2 = { class: "s-navigation" };
 const _hoisted_2$1 = { class: "s-navigation__list" };
-const _hoisted_3 = { class: "s-navigation__text" };
-const _hoisted_4 = { class: "s-navigation__text" };
+const _hoisted_3 = {
+  key: 0,
+  class: "s-navigation__text"
+};
+const _hoisted_4 = {
+  key: 0,
+  class: "s-navigation__text"
+};
 
 function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return (vue.openBlock(), vue.createBlock("nav", _hoisted_1$2, [
@@ -472,7 +479,11 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
                 class: "s-navigation__link"
               }, {
                 default: vue.withCtx(() => [
-                  vue.createVNode("span", _hoisted_3, vue.toDisplayString(item.name), 1)
+                  (!item.element)
+                    ? (vue.openBlock(), vue.createBlock("span", _hoisted_3, vue.toDisplayString(item.name), 1))
+                    : (vue.openBlock(), vue.createBlock(vue.Fragment, { key: 1 }, [
+                        vue.createTextVNode(vue.toDisplayString(item.name), 1 /* TEXT */)
+                      ], 64 /* STABLE_FRAGMENT */))
                 ]),
                 _: 2
               }, 1032, ["href"]))
@@ -484,7 +495,11 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
                 class: "s-navigation__link"
               }, {
                 default: vue.withCtx(() => [
-                  vue.createVNode("span", _hoisted_4, vue.toDisplayString(item.name), 1)
+                  (!item.element)
+                    ? (vue.openBlock(), vue.createBlock("span", _hoisted_4, vue.toDisplayString(item.name), 1))
+                    : (vue.openBlock(), vue.createBlock(vue.Fragment, { key: 1 }, [
+                        vue.createTextVNode(vue.toDisplayString(item.name), 1 /* TEXT */)
+                      ], 64 /* STABLE_FRAGMENT */))
                 ]),
                 _: 2
               }, 1032, ["onClick"]))

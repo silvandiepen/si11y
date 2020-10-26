@@ -8,7 +8,12 @@
 					:href="item.route"
 					class="s-navigation__link"
 				>
-					<span class="s-navigation__text">{{ item.name }}</span>
+					<template v-if="!item.element">
+						<span class="s-navigation__text">{{ item.name }}</span>
+					</template>
+					<template v-else>
+						{{ item.name }}
+					</template>
 				</component>
 				<component
 					:is="getElementType(item)"
@@ -16,7 +21,12 @@
 					@click="item.click"
 					class="s-navigation__link"
 				>
-					<span class="s-navigation__text">{{ item.name }}</span>
+					<template v-if="!item.element">
+						<span class="s-navigation__text">{{ item.name }}</span>
+					</template>
+					<template v-else>
+						{{ item.name }}
+					</template>
 				</component>
 				<slot></slot>
 			</li>
@@ -38,6 +48,7 @@ export default defineComponent({
 	setup(props) {
 		const getElementType = (item: any) => {
 			let elementType = 'a';
+			// if (item.to) elementType = 'route-link';
 			if (item.click) elementType = 'button';
 			if (item.element) elementType = item.element;
 			return elementType;

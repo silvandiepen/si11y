@@ -1,4 +1,4 @@
-import { defineComponent, resolveComponent, openBlock, createBlock, resolveDynamicComponent, withCtx, createVNode, createCommentVNode, renderSlot, ref, toDisplayString, computed, withDirectives, mergeProps, vModelCheckbox, Fragment, renderList, reactive } from 'vue';
+import { defineComponent, resolveComponent, openBlock, createBlock, resolveDynamicComponent, withCtx, createVNode, createCommentVNode, renderSlot, ref, toDisplayString, computed, withDirectives, mergeProps, vModelCheckbox, Fragment, renderList, createTextVNode, reactive } from 'vue';
 
 var script = defineComponent({
   name: 'SButton',
@@ -419,7 +419,8 @@ var script$6 = defineComponent({
 
   setup(props) {
     const getElementType = item => {
-      let elementType = 'a';
+      let elementType = 'a'; // if (item.to) elementType = 'route-link';
+
       if (item.click) elementType = 'button';
       if (item.element) elementType = item.element;
       return elementType;
@@ -435,8 +436,14 @@ var script$6 = defineComponent({
 
 const _hoisted_1$2 = { class: "s-navigation" };
 const _hoisted_2$1 = { class: "s-navigation__list" };
-const _hoisted_3 = { class: "s-navigation__text" };
-const _hoisted_4 = { class: "s-navigation__text" };
+const _hoisted_3 = {
+  key: 0,
+  class: "s-navigation__text"
+};
+const _hoisted_4 = {
+  key: 0,
+  class: "s-navigation__text"
+};
 
 function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock("nav", _hoisted_1$2, [
@@ -453,7 +460,11 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
                 class: "s-navigation__link"
               }, {
                 default: withCtx(() => [
-                  createVNode("span", _hoisted_3, toDisplayString(item.name), 1)
+                  (!item.element)
+                    ? (openBlock(), createBlock("span", _hoisted_3, toDisplayString(item.name), 1))
+                    : (openBlock(), createBlock(Fragment, { key: 1 }, [
+                        createTextVNode(toDisplayString(item.name), 1 /* TEXT */)
+                      ], 64 /* STABLE_FRAGMENT */))
                 ]),
                 _: 2
               }, 1032, ["href"]))
@@ -465,7 +476,11 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
                 class: "s-navigation__link"
               }, {
                 default: withCtx(() => [
-                  createVNode("span", _hoisted_4, toDisplayString(item.name), 1)
+                  (!item.element)
+                    ? (openBlock(), createBlock("span", _hoisted_4, toDisplayString(item.name), 1))
+                    : (openBlock(), createBlock(Fragment, { key: 1 }, [
+                        createTextVNode(toDisplayString(item.name), 1 /* TEXT */)
+                      ], 64 /* STABLE_FRAGMENT */))
                 ]),
                 _: 2
               }, 1032, ["onClick"]))
