@@ -205,6 +205,90 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
 script$2.render = render$2;
 
 var script$3 = defineComponent({
+  name: 'SInputField',
+  // vue component name
+  props: {
+    type: {
+      type: String,
+      default: 'text'
+    },
+    options: {
+      type: Array,
+      default: []
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    mode: {
+      type: String,
+      default: 'default'
+    },
+    stack: {
+      type: Boolean,
+      default: false
+    }
+  },
+
+  setup(props) {
+    const elementType = 'textarea';
+    const dirty = ref(false);
+    const focus = ref(false);
+    const empty = ref(true);
+
+    const onFocus = () => focus.value = true;
+
+    const onBlur = () => focus.value = false;
+
+    const onInput = event => empty.value = !!event.target.value;
+
+    const uid = `input-${Math.round(new Date().valueOf() * Math.random()).toString()}`;
+    return {
+      elementType,
+      props,
+      uid,
+      dirty,
+      focus,
+      empty,
+      onFocus,
+      onBlur,
+      onInput
+    };
+  }
+
+});
+
+function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return (openBlock(), createBlock("div", {
+    class: ["s-input-text-area", [
+			`s-input-text-area--${_ctx.props.mode}`,
+			_ctx.props.stack ? `s-input-text-area--stack` : null,
+			_ctx.dirty ? `s-input-text-area--is-dirty` : null,
+			_ctx.focus ? `s-input-text-area--has-focus` : null,
+			_ctx.empty ? `s-input-text-area--is-empty` : null
+		]]
+  }, [
+    (openBlock(), createBlock(resolveDynamicComponent(_ctx.elementType), {
+      type: _ctx.type,
+      class: "s-input-text__control",
+      onFocus: _ctx.onFocus,
+      onBlur: _ctx.onBlur,
+      onInput: _ctx.onInput,
+      id: _ctx.uid
+    }, null, 8, ["type", "onFocus", "onBlur", "onInput", "id"])),
+    (_ctx.props.label)
+      ? (openBlock(), createBlock("label", {
+          key: 0,
+          for: _ctx.uid,
+          class: "s-input-text__label"
+        }, toDisplayString(_ctx.label), 9, ["for"]))
+      : createCommentVNode("", true)
+  ], 2))
+}
+
+script$3.render = render$3;
+
+var script$4 = defineComponent({
   name: 'SInputFieldGroup',
   // vue component name
   props: {
@@ -230,7 +314,7 @@ var script$3 = defineComponent({
 
 });
 
-function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+function render$4(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock("div", {
     class: ["s-form", [
 			`s-form--${_ctx.props.align}`,
@@ -242,9 +326,9 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
   ], 2))
 }
 
-script$3.render = render$3;
+script$4.render = render$4;
 
-var script$4 = defineComponent({
+var script$5 = defineComponent({
   name: 'SToggle',
   // vue component name
   props: {
@@ -300,7 +384,7 @@ var script$4 = defineComponent({
 
 const _hoisted_1$1 = { class: "s-toggle__text" };
 
-function render$4(_ctx, _cache, $props, $setup, $data, $options) {
+function render$5(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock("div", {
     class: ["s-toggle", `s-toggle--${_ctx.type}`]
   }, [
@@ -321,9 +405,9 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
   ], 2))
 }
 
-script$4.render = render$4;
+script$5.render = render$5;
 
-var script$5 = defineComponent({
+var script$6 = defineComponent({
   name: 'SNavigation',
   // vue component name
   props: {
@@ -346,7 +430,7 @@ const _hoisted_1$2 = { class: "s-navigation" };
 const _hoisted_2$1 = { class: "s-navigation__list" };
 const _hoisted_3 = { class: "s-navigation__text" };
 
-function render$5(_ctx, _cache, $props, $setup, $data, $options) {
+function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock("nav", _hoisted_1$2, [
     createVNode("ul", _hoisted_2$1, [
       (openBlock(true), createBlock(Fragment, null, renderList(_ctx.menu, (item, idx) => {
@@ -366,9 +450,9 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
   ]))
 }
 
-script$5.render = render$5;
+script$6.render = render$6;
 
-var script$6 = defineComponent({
+var script$7 = defineComponent({
   name: 'SHeader',
   // vue component name
   props: {
@@ -415,7 +499,7 @@ const _hoisted_4 = {
   class: "s-header__right"
 };
 
-function render$6(_ctx, _cache, $props, $setup, $data, $options) {
+function render$7(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock("header", _hoisted_1$3, [
     (_ctx.hasSlot.left)
       ? (openBlock(), createBlock("div", _hoisted_2$2, [
@@ -435,20 +519,20 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   ]))
 }
 
-script$6.render = render$6;
+script$7.render = render$7;
 
 const _hoisted_1$4 = { class: "icon" };
 
-function render$7(_ctx, _cache) {
+function render$8(_ctx, _cache) {
   return (openBlock(), createBlock("span", _hoisted_1$4, "Fuck yeah"))
 }
 
-const script$7 = {};
-script$7.render = render$7;
+const script$8 = {};
+script$8.render = render$8;
 
 var sIcon = /*#__PURE__*/Object.freeze({
 	__proto__: null,
-	'default': script$7
+	'default': script$8
 });
 
 /* eslint-disable import/prefer-default-export */
@@ -458,11 +542,12 @@ var components = /*#__PURE__*/Object.freeze({
 	SButton: script,
 	SButtonGroup: script$1,
 	SInputText: script$2,
-	SForm: script$3,
-	SToggle: script$4,
-	SNavigation: script$5,
-	SHeader: script$6,
-	SIcon: script$7
+	SInputTextArea: script$3,
+	SForm: script$4,
+	SToggle: script$5,
+	SNavigation: script$6,
+	SHeader: script$7,
+	SIcon: script$8
 });
 
 // Import vue components
@@ -479,4 +564,4 @@ var entry_esm = {
 }; // To allow individual component use, export components
 
 export default entry_esm;
-export { script as SButton, script$1 as SButtonGroup, script$3 as SForm, script$6 as SHeader, script$7 as SIcon, script$2 as SInputText, script$5 as SNavigation, script$4 as SToggle };
+export { script as SButton, script$1 as SButtonGroup, script$4 as SForm, script$7 as SHeader, script$8 as SIcon, script$2 as SInputText, script$3 as SInputTextArea, script$6 as SNavigation, script$5 as SToggle };

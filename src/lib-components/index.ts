@@ -3,6 +3,7 @@ export { default as SButton } from './s-button.vue';
 export { default as SButtonGroup } from './s-button-group.vue';
 
 export { default as SInputText } from './s-input-text.vue';
+export { default as SInputTextArea } from './s-input-text-area.vue';
 export { default as SForm } from './s-form.vue';
 
 export { default as SToggle } from './s-toggle.vue';

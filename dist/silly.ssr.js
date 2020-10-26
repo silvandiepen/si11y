@@ -241,6 +241,88 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       : vue.createCommentVNode("", true)
   ], 2))
 }script$2.render = render$2;var script$3 = vue.defineComponent({
+  name: 'SInputField',
+  // vue component name
+  props: {
+    type: {
+      type: String,
+      default: 'text'
+    },
+    options: {
+      type: Array,
+      default: []
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    mode: {
+      type: String,
+      default: 'default'
+    },
+    stack: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup: function setup(props) {
+    var elementType = 'textarea';
+    var dirty = vue.ref(false);
+    var focus = vue.ref(false);
+    var empty = vue.ref(true);
+
+    var onFocus = function onFocus() {
+      return focus.value = true;
+    };
+
+    var onBlur = function onBlur() {
+      return focus.value = false;
+    };
+
+    var onInput = function onInput(event) {
+      return empty.value = !!event.target.value;
+    };
+
+    var uid = "input-".concat(Math.round(new Date().valueOf() * Math.random()).toString());
+    return {
+      elementType: elementType,
+      props: props,
+      uid: uid,
+      dirty: dirty,
+      focus: focus,
+      empty: empty,
+      onFocus: onFocus,
+      onBlur: onBlur,
+      onInput: onInput
+    };
+  }
+});function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return (vue.openBlock(), vue.createBlock("div", {
+    class: ["s-input-text-area", [
+			`s-input-text-area--${_ctx.props.mode}`,
+			_ctx.props.stack ? `s-input-text-area--stack` : null,
+			_ctx.dirty ? `s-input-text-area--is-dirty` : null,
+			_ctx.focus ? `s-input-text-area--has-focus` : null,
+			_ctx.empty ? `s-input-text-area--is-empty` : null
+		]]
+  }, [
+    (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.elementType), {
+      type: _ctx.type,
+      class: "s-input-text__control",
+      onFocus: _ctx.onFocus,
+      onBlur: _ctx.onBlur,
+      onInput: _ctx.onInput,
+      id: _ctx.uid
+    }, null, 8, ["type", "onFocus", "onBlur", "onInput", "id"])),
+    (_ctx.props.label)
+      ? (vue.openBlock(), vue.createBlock("label", {
+          key: 0,
+          for: _ctx.uid,
+          class: "s-input-text__label"
+        }, vue.toDisplayString(_ctx.label), 9, ["for"]))
+      : vue.createCommentVNode("", true)
+  ], 2))
+}script$3.render = render$3;var script$4 = vue.defineComponent({
   name: 'SInputFieldGroup',
   // vue component name
   props: {
@@ -262,7 +344,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       props: props
     };
   }
-});function render$3(_ctx, _cache, $props, $setup, $data, $options) {
+});function render$4(_ctx, _cache, $props, $setup, $data, $options) {
   return (vue.openBlock(), vue.createBlock("div", {
     class: ["s-form", [
 			`s-form--${_ctx.props.align}`,
@@ -272,7 +354,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [
     vue.renderSlot(_ctx.$slots, "default", { props: _ctx.props })
   ], 2))
-}script$3.render = render$3;var script$4 = vue.defineComponent({
+}script$4.render = render$4;var script$5 = vue.defineComponent({
   name: 'SToggle',
   // vue component name
   props: {
@@ -329,7 +411,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }
 });const _hoisted_1$1 = { class: "s-toggle__text" };
 
-function render$4(_ctx, _cache, $props, $setup, $data, $options) {
+function render$5(_ctx, _cache, $props, $setup, $data, $options) {
   return (vue.openBlock(), vue.createBlock("div", {
     class: ["s-toggle", `s-toggle--${_ctx.type}`]
   }, [
@@ -348,7 +430,7 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
       vue.createVNode("span", _hoisted_1$1, vue.toDisplayString(_ctx.label), 1)
     ], 8, ["for"])
   ], 2))
-}script$4.render = render$4;var script$5 = vue.defineComponent({
+}script$5.render = render$5;var script$6 = vue.defineComponent({
   name: 'SNavigation',
   // vue component name
   props: {
@@ -367,7 +449,7 @@ function render$4(_ctx, _cache, $props, $setup, $data, $options) {
 const _hoisted_2$1 = { class: "s-navigation__list" };
 const _hoisted_3 = { class: "s-navigation__text" };
 
-function render$5(_ctx, _cache, $props, $setup, $data, $options) {
+function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return (vue.openBlock(), vue.createBlock("nav", _hoisted_1$2, [
     vue.createVNode("ul", _hoisted_2$1, [
       (vue.openBlock(true), vue.createBlock(vue.Fragment, null, vue.renderList(_ctx.menu, (item, idx) => {
@@ -385,7 +467,7 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
       }), 128 /* KEYED_FRAGMENT */))
     ])
   ]))
-}script$5.render = render$5;var script$6 = vue.defineComponent({
+}script$6.render = render$6;var script$7 = vue.defineComponent({
   name: 'SHeader',
   // vue component name
   props: {
@@ -427,7 +509,7 @@ const _hoisted_4 = {
   class: "s-header__right"
 };
 
-function render$6(_ctx, _cache, $props, $setup, $data, $options) {
+function render$7(_ctx, _cache, $props, $setup, $data, $options) {
   return (vue.openBlock(), vue.createBlock("header", _hoisted_1$3, [
     (_ctx.hasSlot.left)
       ? (vue.openBlock(), vue.createBlock("div", _hoisted_2$2, [
@@ -445,12 +527,12 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
         ]))
       : vue.createCommentVNode("", true)
   ]))
-}script$6.render = render$6;const _hoisted_1$4 = { class: "icon" };
+}script$7.render = render$7;const _hoisted_1$4 = { class: "icon" };
 
-function render$7(_ctx, _cache) {
+function render$8(_ctx, _cache) {
   return (vue.openBlock(), vue.createBlock("span", _hoisted_1$4, "Fuck yeah"))
-}var script$7 = {};
-script$7.render = render$7;var sIcon=/*#__PURE__*/Object.freeze({__proto__:null,'default': script$7});/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,SButton: script,SButtonGroup: script$1,SInputText: script$2,SForm: script$3,SToggle: script$4,SNavigation: script$5,SHeader: script$6,SIcon: script$7});var install = function installSilly(app) {
+}var script$8 = {};
+script$8.render = render$8;var sIcon=/*#__PURE__*/Object.freeze({__proto__:null,'default': script$8});/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,SButton: script,SButtonGroup: script$1,SInputText: script$2,SInputTextArea: script$3,SForm: script$4,SToggle: script$5,SNavigation: script$6,SHeader: script$7,SIcon: script$8});var install = function installSilly(app) {
   Object.entries(components).forEach(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         componentName = _ref2[0],
@@ -464,7 +546,7 @@ script$7.render = render$7;var sIcon=/*#__PURE__*/Object.freeze({__proto__:null,
 var plugin = {
   install: install
 }; // To allow individual component use, export components
-var components$1=/*#__PURE__*/Object.freeze({__proto__:null,'default': plugin,SButton: script,SButtonGroup: script$1,SInputText: script$2,SForm: script$3,SToggle: script$4,SNavigation: script$5,SHeader: script$6,SIcon: script$7});// only expose one global var, with named exports exposed as properties of
+var components$1=/*#__PURE__*/Object.freeze({__proto__:null,'default': plugin,SButton: script,SButtonGroup: script$1,SInputText: script$2,SInputTextArea: script$3,SForm: script$4,SToggle: script$5,SNavigation: script$6,SHeader: script$7,SIcon: script$8});// only expose one global var, with named exports exposed as properties of
 // that global var (eg. VivintIcon.iconList)
 
 Object.entries(components$1).forEach(function (_ref) {
