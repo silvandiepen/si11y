@@ -12,6 +12,18 @@
 		<h5>Href button</h5>
 		<s-button link="somelink">Routing Button</s-button>
 	</section>
+	<section class="content">
+		<h3>Styles</h3>
+
+		<h5>Basic Button</h5>
+		<s-button>No Button</s-button>
+
+		<h5>Ghost</h5>
+		<s-button ghost>Ghost Button</s-button>
+
+		<h5>Colored</h5>
+		<s-button link="somelink" color="red">Routing Button</s-button>
+	</section>
 
 	<section class="content">
 		<h3>Button group</h3>

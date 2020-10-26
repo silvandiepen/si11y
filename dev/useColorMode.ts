@@ -1,22 +1,30 @@
-import { watch, onMounted, ref, toRefs } from 'vue';
+import { watch, ref } from 'vue';
 
 export function useColorMode() {
 	const darkMode = ref(false);
 
-	onMounted(() => {
-		if (window.matchMedia('(prefers-color-scheme: dark)').matches)
-			darkMode.value = true;
+	const localDarkMode = localStorage.getItem('darkMode');
 
-		// console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
-	});
+	if (localDarkMode) darkMode.value = JSON.parse(localDarkMode).isDarkMode;
+	else if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+		darkMode.value = true;
 
-	watch(darkMode, () => {
-		console.log('changing mode');
-		document.documentElement.setAttribute(
-			'data-user-color-scheme',
-			darkMode.value ? 'dark' : 'light'
-		);
-	});
+	watch(
+		darkMode,
+		() => {
+			document.documentElement.setAttribute(
+				'data-user-color-scheme',
+				darkMode.value ? 'dark' : 'light'
+			);
+			localStorage.setItem(
+				'darkMode',
+				JSON.stringify({ isDarkMode: darkMode.value })
+			);
+		},
+		{
+			immediate: true
+		}
+	);
 
 	return darkMode;
 }

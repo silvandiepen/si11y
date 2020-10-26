@@ -8,8 +8,6 @@
 			<SToggle label="darkmode" type="switch" v-model="darkMode" />
 		</template>
 	</SHeader>
-	<h1>Test</h1>
-	{{ darkMode }}
 	<main>
 		<router-view />
 	</main>
@@ -22,8 +20,8 @@ import useColorMode from './useColorMode';
 import {
 	SButton,
 	SButtonGroup,
-	SInputField,
-	SInputFieldGroup,
+	SInputText,
+	SForm,
 	SToggle,
 	SNavigation,
 	SHeader
@@ -34,8 +32,8 @@ export default defineComponent({
 	components: {
 		SButton,
 		SButtonGroup,
-		SInputField,
-		SInputFieldGroup,
+		SInputText,
+		SForm,
 		SToggle,
 		SNavigation,
 		SHeader

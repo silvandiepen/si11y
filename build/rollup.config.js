@@ -10,7 +10,8 @@ import babel from '@rollup/plugin-babel';
 import PostCSS from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
-import sass from 'rollup-plugin-sass';
+// import sass from 'rollup-plugin-sass';
+import scss from 'rollup-plugin-scss';
 
 // Get browserslist config and remove ie from es build targets
 const esbrowserslist = fs
@@ -20,8 +21,13 @@ const esbrowserslist = fs
 	.filter((entry) => entry && entry.substring(0, 2) !== 'ie');
 
 const argv = minimist(process.argv.slice(2));
-
 const projectRoot = path.resolve(__dirname, '..');
+
+const PATH_ROOT = '';
+const PATH_SRC = path.resolve(PATH_ROOT, 'src').replace(/\\/gi, '/');
+const PATH_NODE_MODULES = path
+	.resolve(PATH_ROOT, 'node_modules')
+	.replace(/\\/gi, '/'); // Errm.. I use windows 😬
 
 const baseConfig = {
 	input: 'src/entry.ts',
@@ -42,7 +48,15 @@ const baseConfig = {
 		replace: {
 			'process.env.NODE_ENV': JSON.stringify('production')
 		},
-		vue: {},
+		vue: {
+			style: {
+				preprocessOptions: {
+					scss: {
+						includePaths: ['node_modules']
+					}
+				}
+			}
+		},
 		postVue: [
 			// Process only `<style module>` blocks.
 			PostCSS({
@@ -107,7 +121,9 @@ if (!argv.format || argv.format === 'es') {
 				]
 			}),
 			commonjs(),
-			sass()
+			scss({
+				output: true
+			})
 		]
 	};
 	buildFormats.push(esConfig);
@@ -132,7 +148,9 @@ if (!argv.format || argv.format === 'cjs') {
 			...baseConfig.plugins.postVue,
 			babel(baseConfig.plugins.babel),
 			commonjs(),
-			sass()
+			scss({
+				output: true
+			})
 		]
 	};
 	buildFormats.push(umdConfig);
@@ -162,7 +180,9 @@ if (!argv.format || argv.format === 'iife') {
 					ecma: 5
 				}
 			}),
-			sass()
+			scss({
+				output: true
+			})
 		]
 	};
 	buildFormats.push(unpkgConfig);

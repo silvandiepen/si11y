@@ -1,10 +1,6 @@
 <template>
-	<component
-		:is="elementType"
-		class="s-button"
-		:class="[`s-button--${size}`]"
-		:href="href"
-	>
+	<component :is="elementType" class="s-button" :class="style" :href="href">
+		<span v-if="icon" class="s-button__icon"><Icon name="icon" /></span>
 		<span class="s-button__text"><slot /></span>
 	</component>
 </template>
@@ -14,6 +10,9 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
 	name: 'SButton', // vue component name
+	components: {
+		Icon: () => import('./s-icon.vue')
+	},
 	props: {
 		href: {
 			type: String,
@@ -34,13 +33,32 @@ export default defineComponent({
 		small: {
 			type: Boolean,
 			default: false
+		},
+		ghost: {
+			type: Boolean,
+			default: false
+		},
+		color: {
+			type: String,
+			default: false
+		},
+		icon: {
+			type: String,
+			default: false
 		}
 	},
 	setup(props) {
+		const style = [];
+		if (props.ghost) style.push('s-button--ghost');
+		if (props.color) style.push(`s-button--${props.color}`);
+
+		if (props.large) style.push('s-button--large');
+		if (props.small) style.push('s-button--small');
+
 		return {
 			elementType: props.href ? 'a' : 'button',
 			href: props.href ? props.href : null,
-			size: props.large ? 'large' : props.small ? 'small' : 'medium'
+			style
 		};
 	}
 });
@@ -62,6 +80,15 @@ export default defineComponent({
 	text-decoration: none;
 	padding: 0;
 
+	&:focus {
+		outline: none;
+		box-shadow: 0 0 0 0.15em
+			var(--primary-color-highlight, $s-primary-color-highlight);
+		.s-button__text {
+			transform: scale(1.05);
+		}
+	}
+
 	&--large {
 		font-size: 1.25em;
 	}
@@ -79,6 +106,16 @@ export default defineComponent({
 			var(--primary-color-text, $s-primary-color-text)
 		);
 		padding: var(--button-padding, 0.75em 1em);
+	}
+
+	// Styles
+
+	&--ghost {
+		background-color: transparent;
+		box-shadow: 0 0 2px 0 currentColor;
+	}
+	&--red {
+		background-color: red;
 	}
 }
 </style>

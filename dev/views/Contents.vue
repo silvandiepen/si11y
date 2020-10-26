@@ -1,6 +1,14 @@
 <template>
+	<h1>Contents</h1>
 	<section class="content">
-		<h1>Forms</h1>
+		<h1>
+			Nullam imperdiet urna vel felis pretium malesuada. Maecenas a blandit
+			dolor, ac lacinia libero.
+		</h1>
+		<h3>
+			Cras sit amet sodales neque. Pellentesque et mauris eu dolor scelerisque
+			sollicitudin.
+		</h3>
 		<p>
 			Nullam imperdiet urna vel felis pretium malesuada. Maecenas a blandit
 			dolor, ac lacinia libero. Sed nunc metus, sodales eu dolor fermentum,

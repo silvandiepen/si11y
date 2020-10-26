@@ -1,10 +1,10 @@
 <template>
 	<div
-		class="s-input-field-group"
+		class="s-form"
 		:class="[
-			`s-input-field-group--${props.align}`,
-			`s-input-field-group--${props.direction}`,
-			props.stack ? `s-input-field-group--stack` : ``
+			`s-form--${props.align}`,
+			`s-form--${props.direction}`,
+			props.stack ? `s-form--stack` : ``
 		]"
 	>
 		<slot :props="props"></slot>
@@ -41,7 +41,7 @@ export default defineComponent({
 <style lang="scss">
 @import '../style/index.scss';
 
-.s-input-field-group {
+.s-form {
 	display: flex;
 	margin: auto;
 	width: 100%;
@@ -69,7 +69,7 @@ export default defineComponent({
 		& > * + * {
 			margin-top: 1em;
 		}
-		.s-input-field__label {
+		.s-input-text__label {
 			min-width: calc(100% / 3);
 			display: block;
 		}

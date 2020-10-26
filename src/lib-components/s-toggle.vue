@@ -4,7 +4,6 @@
 			:id="uid"
 			class="s-toggle__control"
 			type="checkbox"
-
 			v-model="isChecked"
 			v-bind="$attrs"
 		/>
@@ -13,9 +12,9 @@
 		</label>
 	</div>
 </template>
+
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue';
-// import { useModelWrapper } from './modelWrapper';
 
 export default defineComponent({
 	name: 'SToggle', // vue component name
@@ -31,10 +30,6 @@ export default defineComponent({
 		modelValue: {
 			type: Boolean,
 			default: false
-		},
-		uid: {
-			type: String,
-			default: 'input'
 		}
 	},
 	setup(props, { emit }) {
@@ -60,25 +55,30 @@ export default defineComponent({
 		// Above function is same as below but I added the dirty ref
 		// const isChecked = useModelWrapper(props, emit)
 
+		const uid: string = `input-${Math.round(
+			new Date().valueOf() * Math.random()
+		).toString()}`;
+
 		return {
 			isChecked,
 			onFocus,
 			onBlur,
 			dirty,
-			focus
+			focus,
+			uid
 		};
 	}
 });
 </script>
 
+
 <style lang="scss">
 @import '../style/index.scss';
-$block: '.s-toggle';
 
-#{$block} {
-	border-radius: var(--rounness, $s-form-roundness);
+.s-toggle {
+	border-radius: var(--roundness, $s-form-roundness);
 	&--checkbox {
-		#{$block}__label {
+		.s-toggle__label {
 			margin: 0;
 			position: relative;
 			display: block;
@@ -106,14 +106,16 @@ $block: '.s-toggle';
 				width: 0.75em;
 				height: 0.6em;
 				left: 0.875em;
+				color: var(--primary-color-text, $s-primary-color-text);
+
 				box-shadow: 2px -2px 0 0 currentColor inset;
 				transform: translateY(-66%) translateX(calc(-50% - 1px)) rotate(-45deg)
 					scale(0);
 				transition: transform var(--transition, $s-transition);
 			}
 		}
-		#{$block}__control {
-			&:checked + #{$block}__label {
+		.s-toggle__control {
+			&:checked + .s-toggle__label {
 				&::before {
 					background-color: var(--primary-color, $s-primary-color);
 					border: 1px solid var(--primary-color, $s-primary-color);
@@ -123,7 +125,7 @@ $block: '.s-toggle';
 						rotate(-45deg) scale(1);
 				}
 			}
-			&:focus + #{$block}__label {
+			&:focus + .s-toggle__label {
 				&::before {
 					border: 1px solid var(--primary-color, $s-primary-color);
 					box-shadow: 0 0 0 var(--form-highlight-size, $s-form-highlight-size)
@@ -133,7 +135,7 @@ $block: '.s-toggle';
 		}
 	}
 	&--switch {
-		#{$block}__label {
+		.s-toggle__label {
 			margin: 0;
 			position: relative;
 			display: block;
@@ -161,23 +163,25 @@ $block: '.s-toggle';
 				height: calc(1.5em - 4px);
 				left: 3px;
 				top: 50%;
+				color: currentColor;
 				background-color: currentColor;
 				border-radius: var(--round, 50%);
 				transform: translateY(-50%) translateX(0);
 				transition: transform var(--transition, $s-transition);
 			}
 		}
-		#{$block}__control {
-			&:checked + #{$block}__label {
+		.s-toggle__control {
+			&:checked + .s-toggle__label {
 				&::before {
 					background-color: var(--primary-color, $s-primary-color);
 					border: 1px solid var(--primary-color, $s-primary-color);
 				}
 				&::after {
+					color: var(--primary-color-text, $s-primary-color-text);
 					transform: translateY(-50%) translateX(calc(100% - 4px));
 				}
 			}
-			&:focus + #{$block}__label {
+			&:focus + .s-toggle__label {
 				&::before {
 					border: 1px solid var(--primary-color, $s-primary-color);
 					box-shadow: 0 0 0 var(--form-highlight-size, $s-form-highlight-size)
@@ -186,7 +190,7 @@ $block: '.s-toggle';
 			}
 		}
 	}
-	#{$block}__control {
+	.s-toggle__control {
 		width: 0;
 		height: 0;
 		position: absolute;

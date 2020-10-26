@@ -1,32 +1,32 @@
 <template>
 	<div
-		class="s-input-field"
+		class="s-input-text s-input-text"
 		:class="[
-			`s-input-field--${props.mode}`,
-			props.stack ? `s-input-field--stack` : null,
-			state.dirty ? `s-input-field--is-dirty` : null,
-			state.focus ? `s-input-field--has-focus` : null,
-			state.empty ? `s-input-field--is-empty` : null
+			`s-input-text--${props.mode}`,
+			props.stack ? `s-input-text--stack` : null,
+			dirty ? `s-input-text--is-dirty` : null,
+			focus ? `s-input-text--has-focus` : null,
+			empty ? `s-input-text--is-empty` : null
 		]"
 	>
 		<component
 			:is="elementType"
-			:type="inputType"
-			class="s-input-field__control"
-			@focus="setFocusStatus(state, true)"
-			@blur="setFocusStatus(state, false)"
-			@input="setInputStatus(state)"
-			:id="state.uid"
+			:type="type"
+			class="s-input-text__control"
+			@focus="onFocus"
+			@blur="onBlur"
+			@input="onInput"
+			:id="uid"
 		></component>
-		<label :for="state.uid" v-if="props.label" class="s-input-field__label">{{
-			props.label
+		<label :for="uid" v-if="props.label" class="s-input-text__label">{{
+			label
 		}}</label>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
-import { setFocusStatus, setInputStatus } from './set-utils';
+import { defineComponent, ref } from 'vue';
+// import { setFocusStatus, setInputStatus } from './set-utils';
 export default defineComponent({
 	name: 'SInputField', // vue component name
 	props: {
@@ -53,22 +53,29 @@ export default defineComponent({
 	},
 	setup(props) {
 		const elementType = props?.options.length > 0 ? 'select' : 'input';
-		const inputType = props.type ? props.type : 'text';
 
-		const state = reactive({
-			dirty: false,
-			focus: false,
-			empty: true,
-			uid: new Date().getTime() * Math.random()
-		});
+		const dirty = ref(false);
+		const focus = ref(false);
+		const empty = ref(true);
+
+		const onFocus = () => (focus.value = true);
+		const onBlur = () => (focus.value = false);
+		const onInput = (event: any) => (empty.value = !!event.target.value);
+
+		const uid: string = `input-${Math.round(
+			new Date().valueOf() * Math.random()
+		).toString()}`;
 
 		return {
 			elementType,
-			inputType,
 			props,
-			state,
-			setFocusStatus,
-			setInputStatus
+			uid,
+			dirty,
+			focus,
+			empty,
+			onFocus,
+			onBlur,
+			onInput
 		};
 	}
 });
@@ -77,7 +84,7 @@ export default defineComponent({
 <style lang="scss">
 @import '../style/index.scss';
 
-.s-input-field {
+.s-input-text {
 	display: flex;
 	width: 100%;
 	max-width: 720px;
@@ -88,7 +95,7 @@ export default defineComponent({
 	}
 	&--stack {
 		flex-direction: column-reverse;
-		.s-input-field__label {
+		.s-input-text__label {
 			width: 100%;
 			padding: var(--form-padding, $s-form-padding) 0;
 		}

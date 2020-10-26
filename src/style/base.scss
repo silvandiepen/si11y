@@ -15,6 +15,7 @@ html {
 body {
 	background-color: var(--body-background);
 	color: var(--body-text-color);
+	transition: background-color 0.2s;
 }
 section {
 	max-width: 960px;
@@ -25,6 +26,7 @@ section {
 	& + section {
 		margin-top: 2em;
 	}
+	transition: background-color 0.2s;
 }
 
 .content {
