@@ -210,6 +210,10 @@ var script$3 = defineComponent({
   name: 'SInputField',
   // vue component name
   props: {
+    value: {
+      type: String,
+      default: ''
+    },
     type: {
       type: String,
       default: 'text'

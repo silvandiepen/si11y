@@ -31,6 +31,10 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
 	name: 'SInputField', // vue component name
 	props: {
+		value: {
+			type: String,
+			default: ''
+		},
 		type: {
 			type: String,
 			default: 'text'

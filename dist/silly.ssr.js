@@ -246,6 +246,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   name: 'SInputField',
   // vue component name
   props: {
+    value: {
+      type: String,
+      default: ''
+    },
     type: {
       type: String,
       default: 'text'
