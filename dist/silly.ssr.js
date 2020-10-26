@@ -440,14 +440,22 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
     }
   },
   setup: function setup(props) {
-    // console.log(props.menu);
+    var getElementType = function getElementType(item) {
+      var elementType = 'a';
+      if (item.click) elementType = 'button';
+      if (item.element) elementType = item.element;
+      return elementType;
+    };
+
     return {
-      menu: props.menu
+      menu: props.menu,
+      getElementType: getElementType
     };
   }
 });const _hoisted_1$2 = { class: "s-navigation" };
 const _hoisted_2$1 = { class: "s-navigation__list" };
 const _hoisted_3 = { class: "s-navigation__text" };
+const _hoisted_4 = { class: "s-navigation__text" };
 
 function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return (vue.openBlock(), vue.createBlock("nav", _hoisted_1$2, [
@@ -457,12 +465,31 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
           class: "s-navigation__item",
           key: idx
         }, [
-          vue.createVNode("a", {
-            href: item.route,
-            class: "s-navigation__link"
-          }, [
-            vue.createVNode("span", _hoisted_3, vue.toDisplayString(item.name), 1)
-          ], 8, ["href"])
+          (item.route)
+            ? (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.getElementType(item)), {
+                key: 0,
+                href: item.route,
+                class: "s-navigation__link"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode("span", _hoisted_3, vue.toDisplayString(item.name), 1)
+                ]),
+                _: 2
+              }, 1032, ["href"]))
+            : vue.createCommentVNode("", true),
+          (item.click)
+            ? (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.getElementType(item)), {
+                key: 1,
+                onClick: item.click,
+                class: "s-navigation__link"
+              }, {
+                default: vue.withCtx(() => [
+                  vue.createVNode("span", _hoisted_4, vue.toDisplayString(item.name), 1)
+                ]),
+                _: 2
+              }, 1032, ["onClick"]))
+            : vue.createCommentVNode("", true),
+          vue.renderSlot(_ctx.$slots, "default")
         ]))
       }), 128 /* KEYED_FRAGMENT */))
     ])
@@ -504,7 +531,7 @@ const _hoisted_3$1 = {
   key: 1,
   class: "s-header__middle"
 };
-const _hoisted_4 = {
+const _hoisted_4$1 = {
   key: 2,
   class: "s-header__right"
 };
@@ -522,7 +549,7 @@ function render$7(_ctx, _cache, $props, $setup, $data, $options) {
         ]))
       : vue.createCommentVNode("", true),
     (_ctx.hasSlot.right)
-      ? (vue.openBlock(), vue.createBlock("div", _hoisted_4, [
+      ? (vue.openBlock(), vue.createBlock("div", _hoisted_4$1, [
           vue.renderSlot(_ctx.$slots, "right")
         ]))
       : vue.createCommentVNode("", true)

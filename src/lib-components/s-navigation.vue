@@ -2,9 +2,23 @@
 	<nav class="s-navigation">
 		<ul class="s-navigation__list">
 			<li class="s-navigation__item" v-for="(item, idx) in menu" :key="idx">
-				<a :href="item.route" class="s-navigation__link">
+				<component
+					:is="getElementType(item)"
+					v-if="item.route"
+					:href="item.route"
+					class="s-navigation__link"
+				>
 					<span class="s-navigation__text">{{ item.name }}</span>
-				</a>
+				</component>
+				<component
+					:is="getElementType(item)"
+					v-if="item.click"
+					@click="item.click"
+					class="s-navigation__link"
+				>
+					<span class="s-navigation__text">{{ item.name }}</span>
+				</component>
+				<slot></slot>
 			</li>
 		</ul>
 	</nav>
@@ -22,8 +36,14 @@ export default defineComponent({
 	},
 
 	setup(props) {
-		// console.log(props.menu);
-		return { menu: props.menu };
+		const getElementType = (item: any) => {
+			let elementType = 'a';
+			if (item.click) elementType = 'button';
+			if (item.element) elementType = item.element;
+			return elementType;
+		};
+
+		return { menu: props.menu, getElementType };
 	}
 });
 </script>

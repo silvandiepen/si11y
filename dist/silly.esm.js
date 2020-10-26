@@ -418,9 +418,16 @@ var script$6 = defineComponent({
   },
 
   setup(props) {
-    // console.log(props.menu);
+    const getElementType = item => {
+      let elementType = 'a';
+      if (item.click) elementType = 'button';
+      if (item.element) elementType = item.element;
+      return elementType;
+    };
+
     return {
-      menu: props.menu
+      menu: props.menu,
+      getElementType
     };
   }
 
@@ -429,6 +436,7 @@ var script$6 = defineComponent({
 const _hoisted_1$2 = { class: "s-navigation" };
 const _hoisted_2$1 = { class: "s-navigation__list" };
 const _hoisted_3 = { class: "s-navigation__text" };
+const _hoisted_4 = { class: "s-navigation__text" };
 
 function render$6(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock("nav", _hoisted_1$2, [
@@ -438,12 +446,31 @@ function render$6(_ctx, _cache, $props, $setup, $data, $options) {
           class: "s-navigation__item",
           key: idx
         }, [
-          createVNode("a", {
-            href: item.route,
-            class: "s-navigation__link"
-          }, [
-            createVNode("span", _hoisted_3, toDisplayString(item.name), 1)
-          ], 8, ["href"])
+          (item.route)
+            ? (openBlock(), createBlock(resolveDynamicComponent(_ctx.getElementType(item)), {
+                key: 0,
+                href: item.route,
+                class: "s-navigation__link"
+              }, {
+                default: withCtx(() => [
+                  createVNode("span", _hoisted_3, toDisplayString(item.name), 1)
+                ]),
+                _: 2
+              }, 1032, ["href"]))
+            : createCommentVNode("", true),
+          (item.click)
+            ? (openBlock(), createBlock(resolveDynamicComponent(_ctx.getElementType(item)), {
+                key: 1,
+                onClick: item.click,
+                class: "s-navigation__link"
+              }, {
+                default: withCtx(() => [
+                  createVNode("span", _hoisted_4, toDisplayString(item.name), 1)
+                ]),
+                _: 2
+              }, 1032, ["onClick"]))
+            : createCommentVNode("", true),
+          renderSlot(_ctx.$slots, "default")
         ]))
       }), 128 /* KEYED_FRAGMENT */))
     ])
@@ -494,7 +521,7 @@ const _hoisted_3$1 = {
   key: 1,
   class: "s-header__middle"
 };
-const _hoisted_4 = {
+const _hoisted_4$1 = {
   key: 2,
   class: "s-header__right"
 };
@@ -512,7 +539,7 @@ function render$7(_ctx, _cache, $props, $setup, $data, $options) {
         ]))
       : createCommentVNode("", true),
     (_ctx.hasSlot.right)
-      ? (openBlock(), createBlock("div", _hoisted_4, [
+      ? (openBlock(), createBlock("div", _hoisted_4$1, [
           renderSlot(_ctx.$slots, "right")
         ]))
       : createCommentVNode("", true)
