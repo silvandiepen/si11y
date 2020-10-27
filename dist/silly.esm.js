@@ -1,4 +1,4 @@
-import { defineComponent, resolveComponent, openBlock, createBlock, resolveDynamicComponent, withCtx, createVNode, createCommentVNode, renderSlot, ref, toDisplayString, computed, withDirectives, mergeProps, vModelCheckbox, Fragment, renderList, createTextVNode, reactive } from 'vue';
+import { defineComponent, resolveComponent, openBlock, createBlock, resolveDynamicComponent, withCtx, createVNode, createCommentVNode, renderSlot, ref, toDisplayString, createTextVNode, computed, withDirectives, mergeProps, vModelCheckbox, Fragment, renderList, reactive } from 'vue';
 
 var script = defineComponent({
   name: 'SButton',
@@ -143,10 +143,16 @@ var script$2 = defineComponent({
     stack: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: String,
+      default: ''
     }
   },
 
-  setup(props) {
+  setup(props, {
+    emit
+  }) {
     const elementType = (props === null || props === void 0 ? void 0 : props.options.length) > 0 ? 'select' : 'input';
     const dirty = ref(false);
     const focus = ref(false);
@@ -156,7 +162,12 @@ var script$2 = defineComponent({
 
     const onBlur = () => focus.value = false;
 
-    const onInput = event => empty.value = !!event.target.value;
+    let currentValue = ref(props.value);
+
+    const updateValue = value => {
+      currentValue.value = value;
+      emit('update:modelValue', value);
+    };
 
     const uid = `input-${Math.round(new Date().valueOf() * Math.random()).toString()}`;
     return {
@@ -168,7 +179,8 @@ var script$2 = defineComponent({
       empty,
       onFocus,
       onBlur,
-      onInput
+      updateValue,
+      currentValue
     };
   }
 
@@ -187,13 +199,14 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
     (openBlock(), createBlock(resolveDynamicComponent(_ctx.elementType), {
       type: _ctx.type,
       class: "s-input-text__control",
-      modelValue: _ctx.value,
-      "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => (_ctx.value = $event)),
       onFocus: _ctx.onFocus,
       onBlur: _ctx.onBlur,
-      onInput: _ctx.onInput,
-      id: _ctx.uid
-    }, null, 8, ["type", "modelValue", "onFocus", "onBlur", "onInput", "id"])),
+      onInput: _cache[1] || (_cache[1] = $event => (_ctx.updateValue($event.target.value))),
+      id: _ctx.uid,
+      placeholder: _ctx.props.label,
+      value: _ctx.currentValue,
+      required: _ctx.required
+    }, null, 8, ["type", "onFocus", "onBlur", "id", "placeholder", "value", "required"])),
     (_ctx.props.label)
       ? (openBlock(), createBlock("label", {
           key: 0,
@@ -210,14 +223,6 @@ var script$3 = defineComponent({
   name: 'SInputField',
   // vue component name
   props: {
-    value: {
-      type: String,
-      default: ''
-    },
-    type: {
-      type: String,
-      default: 'text'
-    },
     options: {
       type: Array,
       default: []
@@ -233,10 +238,16 @@ var script$3 = defineComponent({
     stack: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: String,
+      default: ''
     }
   },
 
-  setup(props) {
+  setup(props, {
+    emit
+  }) {
     const elementType = 'textarea';
     const dirty = ref(false);
     const focus = ref(false);
@@ -246,9 +257,14 @@ var script$3 = defineComponent({
 
     const onBlur = () => focus.value = false;
 
-    const onInput = event => empty.value = !!event.target.value;
+    let currentValue = ref(props.value);
 
-    const uid = `input-${Math.round(new Date().valueOf() * Math.random()).toString()}`;
+    const updateValue = value => {
+      currentValue.value = value;
+      emit('update:modelValue', value);
+    };
+
+    const uid = `text-area-${Math.round(new Date().valueOf() * Math.random()).toString()}`;
     return {
       elementType,
       props,
@@ -258,7 +274,7 @@ var script$3 = defineComponent({
       empty,
       onFocus,
       onBlur,
-      onInput
+      updateValue
     };
   }
 
@@ -266,29 +282,30 @@ var script$3 = defineComponent({
 
 function render$3(_ctx, _cache, $props, $setup, $data, $options) {
   return (openBlock(), createBlock("div", {
-    class: ["s-input-text-area", [
-			`s-input-text-area--${_ctx.props.mode}`,
-			_ctx.props.stack ? `s-input-text-area--stack` : null,
-			_ctx.dirty ? `s-input-text-area--is-dirty` : null,
-			_ctx.focus ? `s-input-text-area--has-focus` : null,
-			_ctx.empty ? `s-input-text-area--is-empty` : null
+    class: ["s-text-area", [
+			`s-text-area--${_ctx.props.mode}`,
+			_ctx.props.stack ? `s-text-area--stack` : null,
+			_ctx.dirty ? `s-text-area--is-dirty` : null,
+			_ctx.focus ? `s-text-area--has-focus` : null,
+			_ctx.empty ? `s-text-area--is-empty` : null
 		]]
   }, [
     (openBlock(), createBlock(resolveDynamicComponent(_ctx.elementType), {
-      type: _ctx.type,
-      class: "s-input-text__control",
-      modelValue: _ctx.value,
-      "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => (_ctx.value = $event)),
+      class: "s-text-area__control",
       onFocus: _ctx.onFocus,
       onBlur: _ctx.onBlur,
-      onInput: _ctx.onInput,
-      id: _ctx.uid
-    }, null, 8, ["type", "modelValue", "onFocus", "onBlur", "onInput", "id"])),
+      onInput: _cache[1] || (_cache[1] = $event => (_ctx.updateValue($event.target.value))),
+      id: _ctx.uid,
+      placeholder: _ctx.props.label,
+      value: _ctx.currentValue,
+      required: _ctx.required
+    }, null, 8, ["onFocus", "onBlur", "id", "placeholder", "value", "required"])),
+    createTextVNode(" " + toDisplayString(_ctx.currentValue) + " ", 1 /* TEXT */),
     (_ctx.props.label)
       ? (openBlock(), createBlock("label", {
           key: 0,
           for: _ctx.uid,
-          class: "s-input-text__label"
+          class: "s-text-area__label"
         }, toDisplayString(_ctx.label), 9, ["for"]))
       : createCommentVNode("", true)
   ], 2))
@@ -592,7 +609,7 @@ var components = /*#__PURE__*/Object.freeze({
 	SButton: script,
 	SButtonGroup: script$1,
 	SInputText: script$2,
-	SInputTextArea: script$3,
+	STextArea: script$3,
 	SForm: script$4,
 	SToggle: script$5,
 	SNavigation: script$6,
@@ -614,4 +631,4 @@ var entry_esm = {
 }; // To allow individual component use, export components
 
 export default entry_esm;
-export { script as SButton, script$1 as SButtonGroup, script$4 as SForm, script$7 as SHeader, script$8 as SIcon, script$2 as SInputText, script$3 as SInputTextArea, script$6 as SNavigation, script$5 as SToggle };
+export { script as SButton, script$1 as SButtonGroup, script$4 as SForm, script$7 as SHeader, script$8 as SIcon, script$2 as SInputText, script$6 as SNavigation, script$3 as STextArea, script$5 as SToggle };

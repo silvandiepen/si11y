@@ -23,10 +23,8 @@
 		"build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife",
 		"stylelint": "stylelint '**/*.vue' '**/*.scss'"
 	},
-	"dependencies": {
-		"rollup-plugin-scss": "^2.6.1"
-	},
 	"devDependencies": {
+		"rollup-plugin-scss": "^2.6.1",
 		"vue-router": "^4.0.0-beta.13",
 		"prettier": "^2.1.2",
 		"sass-loader": "^10.0.3",

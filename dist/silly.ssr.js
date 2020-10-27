@@ -181,9 +181,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     stack: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: String,
+      default: ''
     }
   },
-  setup: function setup(props) {
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit;
     var elementType = (props === null || props === void 0 ? void 0 : props.options.length) > 0 ? 'select' : 'input';
     var dirty = vue.ref(false);
     var focus = vue.ref(false);
@@ -197,8 +202,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return focus.value = false;
     };
 
-    var onInput = function onInput(event) {
-      return empty.value = !!event.target.value;
+    var currentValue = vue.ref(props.value);
+
+    var updateValue = function updateValue(value) {
+      currentValue.value = value;
+      emit('update:modelValue', value);
     };
 
     var uid = "input-".concat(Math.round(new Date().valueOf() * Math.random()).toString());
@@ -211,7 +219,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       empty: empty,
       onFocus: onFocus,
       onBlur: onBlur,
-      onInput: onInput
+      updateValue: updateValue,
+      currentValue: currentValue
     };
   }
 });function render$2(_ctx, _cache, $props, $setup, $data, $options) {
@@ -227,13 +236,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.elementType), {
       type: _ctx.type,
       class: "s-input-text__control",
-      modelValue: _ctx.value,
-      "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => (_ctx.value = $event)),
       onFocus: _ctx.onFocus,
       onBlur: _ctx.onBlur,
-      onInput: _ctx.onInput,
-      id: _ctx.uid
-    }, null, 8, ["type", "modelValue", "onFocus", "onBlur", "onInput", "id"])),
+      onInput: _cache[1] || (_cache[1] = $event => (_ctx.updateValue($event.target.value))),
+      id: _ctx.uid,
+      placeholder: _ctx.props.label,
+      value: _ctx.currentValue,
+      required: _ctx.required
+    }, null, 8, ["type", "onFocus", "onBlur", "id", "placeholder", "value", "required"])),
     (_ctx.props.label)
       ? (vue.openBlock(), vue.createBlock("label", {
           key: 0,
@@ -246,14 +256,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   name: 'SInputField',
   // vue component name
   props: {
-    value: {
-      type: String,
-      default: ''
-    },
-    type: {
-      type: String,
-      default: 'text'
-    },
     options: {
       type: Array,
       default: []
@@ -269,9 +271,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     stack: {
       type: Boolean,
       default: false
+    },
+    value: {
+      type: String,
+      default: ''
     }
   },
-  setup: function setup(props) {
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit;
     var elementType = 'textarea';
     var dirty = vue.ref(false);
     var focus = vue.ref(false);
@@ -285,11 +292,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return focus.value = false;
     };
 
-    var onInput = function onInput(event) {
-      return empty.value = !!event.target.value;
+    var currentValue = vue.ref(props.value);
+
+    var updateValue = function updateValue(value) {
+      currentValue.value = value;
+      emit('update:modelValue', value);
     };
 
-    var uid = "input-".concat(Math.round(new Date().valueOf() * Math.random()).toString());
+    var uid = "text-area-".concat(Math.round(new Date().valueOf() * Math.random()).toString());
     return {
       elementType: elementType,
       props: props,
@@ -299,34 +309,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       empty: empty,
       onFocus: onFocus,
       onBlur: onBlur,
-      onInput: onInput
+      updateValue: updateValue
     };
   }
 });function render$3(_ctx, _cache, $props, $setup, $data, $options) {
   return (vue.openBlock(), vue.createBlock("div", {
-    class: ["s-input-text-area", [
-			`s-input-text-area--${_ctx.props.mode}`,
-			_ctx.props.stack ? `s-input-text-area--stack` : null,
-			_ctx.dirty ? `s-input-text-area--is-dirty` : null,
-			_ctx.focus ? `s-input-text-area--has-focus` : null,
-			_ctx.empty ? `s-input-text-area--is-empty` : null
+    class: ["s-text-area", [
+			`s-text-area--${_ctx.props.mode}`,
+			_ctx.props.stack ? `s-text-area--stack` : null,
+			_ctx.dirty ? `s-text-area--is-dirty` : null,
+			_ctx.focus ? `s-text-area--has-focus` : null,
+			_ctx.empty ? `s-text-area--is-empty` : null
 		]]
   }, [
     (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.elementType), {
-      type: _ctx.type,
-      class: "s-input-text__control",
-      modelValue: _ctx.value,
-      "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => (_ctx.value = $event)),
+      class: "s-text-area__control",
       onFocus: _ctx.onFocus,
       onBlur: _ctx.onBlur,
-      onInput: _ctx.onInput,
-      id: _ctx.uid
-    }, null, 8, ["type", "modelValue", "onFocus", "onBlur", "onInput", "id"])),
+      onInput: _cache[1] || (_cache[1] = $event => (_ctx.updateValue($event.target.value))),
+      id: _ctx.uid,
+      placeholder: _ctx.props.label,
+      value: _ctx.currentValue,
+      required: _ctx.required
+    }, null, 8, ["onFocus", "onBlur", "id", "placeholder", "value", "required"])),
+    vue.createTextVNode(" " + vue.toDisplayString(_ctx.currentValue) + " ", 1 /* TEXT */),
     (_ctx.props.label)
       ? (vue.openBlock(), vue.createBlock("label", {
           key: 0,
           for: _ctx.uid,
-          class: "s-input-text__label"
+          class: "s-text-area__label"
         }, vue.toDisplayString(_ctx.label), 9, ["for"]))
       : vue.createCommentVNode("", true)
   ], 2))
@@ -582,7 +593,7 @@ function render$7(_ctx, _cache, $props, $setup, $data, $options) {
 function render$8(_ctx, _cache) {
   return (vue.openBlock(), vue.createBlock("span", _hoisted_1$4, "Fuck yeah"))
 }var script$8 = {};
-script$8.render = render$8;var sIcon=/*#__PURE__*/Object.freeze({__proto__:null,'default': script$8});/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,SButton: script,SButtonGroup: script$1,SInputText: script$2,SInputTextArea: script$3,SForm: script$4,SToggle: script$5,SNavigation: script$6,SHeader: script$7,SIcon: script$8});var install = function installSilly(app) {
+script$8.render = render$8;var sIcon=/*#__PURE__*/Object.freeze({__proto__:null,'default': script$8});/* eslint-disable import/prefer-default-export */var components=/*#__PURE__*/Object.freeze({__proto__:null,SButton: script,SButtonGroup: script$1,SInputText: script$2,STextArea: script$3,SForm: script$4,SToggle: script$5,SNavigation: script$6,SHeader: script$7,SIcon: script$8});var install = function installSilly(app) {
   Object.entries(components).forEach(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
         componentName = _ref2[0],
@@ -596,7 +607,7 @@ script$8.render = render$8;var sIcon=/*#__PURE__*/Object.freeze({__proto__:null,
 var plugin = {
   install: install
 }; // To allow individual component use, export components
-var components$1=/*#__PURE__*/Object.freeze({__proto__:null,'default': plugin,SButton: script,SButtonGroup: script$1,SInputText: script$2,SInputTextArea: script$3,SForm: script$4,SToggle: script$5,SNavigation: script$6,SHeader: script$7,SIcon: script$8});// only expose one global var, with named exports exposed as properties of
+var components$1=/*#__PURE__*/Object.freeze({__proto__:null,'default': plugin,SButton: script,SButtonGroup: script$1,SInputText: script$2,STextArea: script$3,SForm: script$4,SToggle: script$5,SNavigation: script$6,SHeader: script$7,SIcon: script$8});// only expose one global var, with named exports exposed as properties of
 // that global var (eg. VivintIcon.iconList)
 
 Object.entries(components$1).forEach(function (_ref) {

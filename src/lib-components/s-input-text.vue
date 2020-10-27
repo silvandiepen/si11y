@@ -13,11 +13,13 @@
 			:is="elementType"
 			:type="type"
 			class="s-input-text__control"
-			v-model="value"
 			@focus="onFocus"
 			@blur="onBlur"
-			@input="onInput"
+			@input="updateValue($event.target.value)"
 			:id="uid"
+			:placeholder="props.label"
+			:value="currentValue"
+			:required="required"
 		></component>
 		<label :for="uid" v-if="props.label" class="s-input-text__label">{{
 			label
@@ -50,9 +52,14 @@ export default defineComponent({
 		stack: {
 			type: Boolean,
 			default: false
+		},
+		value: {
+			type: String,
+			default: ''
 		}
 	},
-	setup(props) {
+
+	setup(props, { emit }) {
 		const elementType = props?.options.length > 0 ? 'select' : 'input';
 
 		const dirty = ref(false);
@@ -61,7 +68,13 @@ export default defineComponent({
 
 		const onFocus = () => (focus.value = true);
 		const onBlur = () => (focus.value = false);
-		const onInput = (event: any) => (empty.value = !!event.target.value);
+
+		let currentValue = ref(props.value);
+
+		const updateValue = (value: string | number) => {
+			currentValue.value = value as string;
+			emit('update:modelValue', value);
+		};
 
 		const uid: string = `input-${Math.round(
 			new Date().valueOf() * Math.random()
@@ -76,7 +89,8 @@ export default defineComponent({
 			empty,
 			onFocus,
 			onBlur,
-			onInput
+			updateValue,
+			currentValue
 		};
 	}
 });
