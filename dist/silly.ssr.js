@@ -253,7 +253,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       : vue.createCommentVNode("", true)
   ], 2))
 }script$2.render = render$2;var script$3 = vue.defineComponent({
-  name: 'SInputField',
+  name: 'STextArea',
   // vue component name
   props: {
     options: {
@@ -332,7 +332,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       value: _ctx.currentValue,
       required: _ctx.required
     }, null, 8, ["onFocus", "onBlur", "id", "placeholder", "value", "required"])),
-    vue.createTextVNode(" " + vue.toDisplayString(_ctx.currentValue) + " ", 1 /* TEXT */),
     (_ctx.props.label)
       ? (vue.openBlock(), vue.createBlock("label", {
           key: 0,
@@ -342,7 +341,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       : vue.createCommentVNode("", true)
   ], 2))
 }script$3.render = render$3;var script$4 = vue.defineComponent({
-  name: 'SInputFieldGroup',
+  name: 'SForm',
   // vue component name
   props: {
     direction: {
@@ -356,23 +355,32 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     stack: {
       type: Boolean,
       default: false
+    },
+    action: {
+      type: String,
+      default: ''
     }
   },
   setup: function setup(props) {
+    var elementType = props.action ? 'form' : 'div';
     return {
-      props: props
+      props: props,
+      elementType: elementType
     };
   }
 });function render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return (vue.openBlock(), vue.createBlock("form", {
+  return (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.elementType), {
     class: ["s-form", [
 			`s-form--${_ctx.props.align}`,
 			`s-form--${_ctx.props.direction}`,
 			_ctx.props.stack ? `s-form--stack` : ``
 		]]
-  }, [
-    vue.renderSlot(_ctx.$slots, "default", { props: _ctx.props })
-  ], 2))
+  }, {
+    default: vue.withCtx(() => [
+      vue.renderSlot(_ctx.$slots, "default", { props: _ctx.props })
+    ]),
+    _: 3
+  }, 8, ["class"]))
 }script$4.render = render$4;var script$5 = vue.defineComponent({
   name: 'SToggle',
   // vue component name

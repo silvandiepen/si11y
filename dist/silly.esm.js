@@ -1,4 +1,4 @@
-import { defineComponent, resolveComponent, openBlock, createBlock, resolveDynamicComponent, withCtx, createVNode, createCommentVNode, renderSlot, ref, toDisplayString, createTextVNode, computed, withDirectives, mergeProps, vModelCheckbox, Fragment, renderList, reactive } from 'vue';
+import { defineComponent, resolveComponent, openBlock, createBlock, resolveDynamicComponent, withCtx, createVNode, createCommentVNode, renderSlot, ref, toDisplayString, computed, withDirectives, mergeProps, vModelCheckbox, Fragment, renderList, createTextVNode, reactive } from 'vue';
 
 var script = defineComponent({
   name: 'SButton',
@@ -220,7 +220,7 @@ function render$2(_ctx, _cache, $props, $setup, $data, $options) {
 script$2.render = render$2;
 
 var script$3 = defineComponent({
-  name: 'SInputField',
+  name: 'STextArea',
   // vue component name
   props: {
     options: {
@@ -300,7 +300,6 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
       value: _ctx.currentValue,
       required: _ctx.required
     }, null, 8, ["onFocus", "onBlur", "id", "placeholder", "value", "required"])),
-    createTextVNode(" " + toDisplayString(_ctx.currentValue) + " ", 1 /* TEXT */),
     (_ctx.props.label)
       ? (openBlock(), createBlock("label", {
           key: 0,
@@ -314,7 +313,7 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
 script$3.render = render$3;
 
 var script$4 = defineComponent({
-  name: 'SInputFieldGroup',
+  name: 'SForm',
   // vue component name
   props: {
     direction: {
@@ -328,27 +327,36 @@ var script$4 = defineComponent({
     stack: {
       type: Boolean,
       default: false
+    },
+    action: {
+      type: String,
+      default: ''
     }
   },
 
   setup(props) {
+    const elementType = props.action ? 'form' : 'div';
     return {
-      props
+      props,
+      elementType
     };
   }
 
 });
 
 function render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return (openBlock(), createBlock("form", {
+  return (openBlock(), createBlock(resolveDynamicComponent(_ctx.elementType), {
     class: ["s-form", [
 			`s-form--${_ctx.props.align}`,
 			`s-form--${_ctx.props.direction}`,
 			_ctx.props.stack ? `s-form--stack` : ``
 		]]
-  }, [
-    renderSlot(_ctx.$slots, "default", { props: _ctx.props })
-  ], 2))
+  }, {
+    default: withCtx(() => [
+      renderSlot(_ctx.$slots, "default", { props: _ctx.props })
+    ]),
+    _: 3
+  }, 8, ["class"]))
 }
 
 script$4.render = render$4;

@@ -1,5 +1,6 @@
 <template>
-	<form
+	<component
+		:is="elementType"
 		class="s-form"
 		:class="[
 			`s-form--${props.align}`,
@@ -8,14 +9,14 @@
 		]"
 	>
 		<slot :props="props"></slot>
-	</form>
+	</component>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-	name: 'SInputFieldGroup', // vue component name
+	name: 'SForm', // vue component name
 	props: {
 		direction: {
 			type: String,
@@ -28,11 +29,17 @@ export default defineComponent({
 		stack: {
 			type: Boolean,
 			default: false
+		},
+		action: {
+			type: String,
+			default: ''
 		}
 	},
 	setup(props) {
+		const elementType = props.action ? 'form' : 'div';
 		return {
-			props
+			props,
+			elementType
 		};
 	}
 });
