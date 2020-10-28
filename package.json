@@ -13,7 +13,8 @@
 		"dist/*",
 		"silly.d.ts",
 		"src/**/*.vue",
-		"src/style/**.scss"
+		"src/helpers/*",
+		"src/style/*.scss"
 	],
 	"scripts": {
 		"serve:webpack": "vue-cli-service serve dev/main.ts",
@@ -25,10 +26,6 @@
 		"stylelint": "stylelint '**/*.vue' '**/*.scss'"
 	},
 	"devDependencies": {
-		"rollup-plugin-scss": "^2.6.1",
-		"vue-router": "^4.0.0-beta.13",
-		"prettier": "^2.1.2",
-		"sass-loader": "^10.0.3",
 		"@babel/core": "^7.11.4",
 		"@babel/preset-env": "^7.11.0",
 		"@babel/preset-typescript": "^7.10.4",
@@ -41,18 +38,22 @@
 		"cross-env": "^7.0.2",
 		"lodash": "^4.17.20",
 		"minimist": "^1.2.5",
+		"prettier": "^2.1.2",
 		"rollup": "^2.26.5",
 		"rollup-plugin-postcss": "^3.1.6",
 		"rollup-plugin-sass": "^1.2.2",
+		"rollup-plugin-scss": "^2.6.1",
 		"rollup-plugin-terser": "^7.0.0",
 		"rollup-plugin-vue": "^6.0.0-beta.10",
 		"sass": "^1.27.0",
+		"sass-loader": "^10.0.3",
 		"stylelint": "^13.7.2",
 		"stylelint-logical-order": "^0.1.0",
 		"stylelint-order": "^4.1.0",
 		"typescript": "^3.8.3",
 		"vite": "^1.0.0-rc.4",
-		"vue": "^3.0.0-rc.9"
+		"vue": "^3.0.0-rc.9",
+		"vue-router": "^4.0.0-beta.13"
 	},
 	"peerDependencies": {
 		"vue": "^3.0.0-rc.9"

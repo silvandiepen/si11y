@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue';
-import useColorMode from './useColorMode';
+import useColorMode from '@/helpers/useColorMode';
 
 import {
 	SButton,
