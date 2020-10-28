@@ -6,6 +6,7 @@
 			type="checkbox"
 			v-model="isChecked"
 			v-bind="$attrs"
+			:required="required"
 		/>
 		<label :for="uid" class="s-toggle__label">
 			<span class="s-toggle__text">{{ label }}</span>
@@ -26,6 +27,10 @@ export default defineComponent({
 		label: {
 			type: String,
 			default: ''
+		},
+		required: {
+			type: Boolean,
+			default: false
 		},
 		modelValue: {
 			type: Boolean,

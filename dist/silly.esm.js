@@ -1,4 +1,4 @@
-import { defineComponent, resolveComponent, openBlock, createBlock, resolveDynamicComponent, withCtx, createVNode, createCommentVNode, renderSlot, ref, toDisplayString, computed, withDirectives, mergeProps, vModelCheckbox, Fragment, renderList, createTextVNode, reactive } from 'vue';
+import { defineComponent, resolveComponent, openBlock, createBlock, resolveDynamicComponent, withCtx, createVNode, createCommentVNode, renderSlot, ref, toDisplayString, createTextVNode, computed, withDirectives, mergeProps, vModelCheckbox, Fragment, renderList, reactive } from 'vue';
 
 var script = defineComponent({
   name: 'SButton',
@@ -144,6 +144,10 @@ var script$2 = defineComponent({
       type: Boolean,
       default: false
     },
+    required: {
+      type: Boolean,
+      default: false
+    },
     value: {
       type: String,
       default: ''
@@ -239,6 +243,10 @@ var script$3 = defineComponent({
       type: Boolean,
       default: false
     },
+    required: {
+      type: Boolean,
+      default: false
+    },
     value: {
       type: String,
       default: ''
@@ -291,15 +299,19 @@ function render$3(_ctx, _cache, $props, $setup, $data, $options) {
 		]]
   }, [
     (openBlock(), createBlock(resolveDynamicComponent(_ctx.elementType), {
-      class: "s-text-area__control",
+      class: "s-input-text__control",
       onFocus: _ctx.onFocus,
       onBlur: _ctx.onBlur,
       onInput: _cache[1] || (_cache[1] = $event => (_ctx.updateValue($event.target.value))),
       id: _ctx.uid,
       placeholder: _ctx.props.label,
-      value: _ctx.currentValue,
       required: _ctx.required
-    }, null, 8, ["onFocus", "onBlur", "id", "placeholder", "value", "required"])),
+    }, {
+      default: withCtx(() => [
+        createTextVNode(toDisplayString(_ctx.currentValue), 1 /* TEXT */)
+      ]),
+      _: 1
+    }, 8, ["onFocus", "onBlur", "id", "placeholder", "required"])),
     (_ctx.props.label)
       ? (openBlock(), createBlock("label", {
           key: 0,
@@ -373,6 +385,10 @@ var script$5 = defineComponent({
       type: String,
       default: ''
     },
+    required: {
+      type: Boolean,
+      default: false
+    },
     modelValue: {
       type: Boolean,
       default: false
@@ -426,7 +442,7 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
       class: "s-toggle__control",
       type: "checkbox",
       "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => (_ctx.isChecked = $event))
-    }, _ctx.$attrs), null, 16, ["id"]), [
+    }, _ctx.$attrs, { required: _ctx.required }), null, 16, ["id", "required"]), [
       [vModelCheckbox, _ctx.isChecked]
     ]),
     createVNode("label", {

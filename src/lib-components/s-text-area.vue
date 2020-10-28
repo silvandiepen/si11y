@@ -48,6 +48,10 @@ export default defineComponent({
 			type: Boolean,
 			default: false
 		},
+		required: {
+			type: Boolean,
+			default: false
+		},
 		value: {
 			type: String,
 			default: ''

@@ -182,6 +182,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       type: Boolean,
       default: false
     },
+    required: {
+      type: Boolean,
+      default: false
+    },
     value: {
       type: String,
       default: ''
@@ -272,6 +276,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       type: Boolean,
       default: false
     },
+    required: {
+      type: Boolean,
+      default: false
+    },
     value: {
       type: String,
       default: ''
@@ -323,15 +331,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 		]]
   }, [
     (vue.openBlock(), vue.createBlock(vue.resolveDynamicComponent(_ctx.elementType), {
-      class: "s-text-area__control",
+      class: "s-input-text__control",
       onFocus: _ctx.onFocus,
       onBlur: _ctx.onBlur,
       onInput: _cache[1] || (_cache[1] = $event => (_ctx.updateValue($event.target.value))),
       id: _ctx.uid,
       placeholder: _ctx.props.label,
-      value: _ctx.currentValue,
       required: _ctx.required
-    }, null, 8, ["onFocus", "onBlur", "id", "placeholder", "value", "required"])),
+    }, {
+      default: vue.withCtx(() => [
+        vue.createTextVNode(vue.toDisplayString(_ctx.currentValue), 1 /* TEXT */)
+      ]),
+      _: 1
+    }, 8, ["onFocus", "onBlur", "id", "placeholder", "required"])),
     (_ctx.props.label)
       ? (vue.openBlock(), vue.createBlock("label", {
           key: 0,
@@ -393,6 +405,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       type: String,
       default: ''
     },
+    required: {
+      type: Boolean,
+      default: false
+    },
     modelValue: {
       type: Boolean,
       default: false
@@ -447,7 +463,7 @@ function render$5(_ctx, _cache, $props, $setup, $data, $options) {
       class: "s-toggle__control",
       type: "checkbox",
       "onUpdate:modelValue": _cache[1] || (_cache[1] = $event => (_ctx.isChecked = $event))
-    }, _ctx.$attrs), null, 16, ["id"]), [
+    }, _ctx.$attrs, { required: _ctx.required }), null, 16, ["id", "required"]), [
       [vue.vModelCheckbox, _ctx.isChecked]
     ]),
     vue.createVNode("label", {
