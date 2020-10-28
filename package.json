@@ -12,7 +12,8 @@
 	"files": [
 		"dist/*",
 		"silly.d.ts",
-		"src/**/*.vue"
+		"src/**/*.vue",
+		"src/style/**.scss"
 	],
 	"scripts": {
 		"serve:webpack": "vue-cli-service serve dev/main.ts",
