@@ -38,6 +38,14 @@ const baseConfig = {
 					{
 						find: '@',
 						replacement: `${path.resolve(projectRoot, 'src')}`
+					},
+					{
+						find: '@components',
+						replacement: `${path.resolve(projectRoot, 'src/lib-components')}`
+					},
+					{
+						find: '@views',
+						replacement: `${path.resolve(projectRoot, 'dev/views')}`
 					}
 				],
 				customResolver: resolve({

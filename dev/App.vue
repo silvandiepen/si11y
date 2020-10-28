@@ -26,7 +26,7 @@ import {
 	SToggle,
 	SNavigation,
 	SHeader
-} from '../src/entry.esm';
+} from '@/entry.esm';
 
 export default defineComponent({
 	name: 'App',
