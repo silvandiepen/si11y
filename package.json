@@ -1,6 +1,6 @@
 {
 	"name": "si11y",
-	"version": "1.0.12",
+	"version": "1.0.13",
 	"description": "Sil's Component Library",
 	"license": "MIT",
 	"main": "dist/silly.esm.js",
