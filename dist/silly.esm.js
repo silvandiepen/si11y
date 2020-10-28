@@ -33,11 +33,11 @@ var script = defineComponent({
     },
     color: {
       type: String,
-      default: false
+      default: ``
     },
     icon: {
       type: String,
-      default: false
+      default: ``
     }
   },
 

@@ -28,39 +28,6 @@
   .s-button--red {
     background-color: red; }
 
-.s-input-text {
-  display: flex;
-  width: 100%;
-  max-width: 720px; }
-  .s-input-text--default {
-    flex-direction: row-reverse;
-    justify-content: flex-end; }
-  .s-input-text--stack {
-    flex-direction: column-reverse; }
-    .s-input-text--stack .s-input-text__label {
-      width: 100%;
-      padding: var(--form-padding, 0.5em) 0; }
-  .s-input-text__label {
-    padding: var(--form-padding, 0.5em);
-    font-size: var(--form-font-size, 1em); }
-  .s-input-text__control {
-    width: 100%;
-    border: none;
-    border: var(--form-border, 1px solid currentColor);
-    border-radius: var(--form-roundness, var(--roundness, 0.33em));
-    background-color: transparent;
-    font-size: var(--form-font-size, 1em);
-    color: var(--form-text-color);
-    padding: var(--form-padding, 0.5em);
-    transition: box-shadow var(--transition, 0.23s ease-in-out); }
-    .s-input-text__control:empty {
-      opacity: 0.5; }
-    .s-input-text__control:focus {
-      outline: none;
-      border-color: var(--primary-color, #2288ff);
-      box-shadow: 0 0 0 var(--form-highlight-size, 0.2em) var(--form-highlight-color, rgba(34, 136, 255, 0.33));
-      opacity: 1; }
-
 .s-button-group {
   display: flex; }
   .s-button-group .s-button {
@@ -85,32 +52,6 @@
     .s-button-group--vertical > .s-button + .s-button,
     .s-button-group--vertical > * + * {
       margin-top: 1em; }
-
-.s-form {
-  display: flex;
-  margin: auto;
-  width: 100%;
-  max-width: 720px; }
-  .s-form--center {
-    justify-content: center;
-    align-items: center; }
-  .s-form--start {
-    justify-content: flex-start;
-    align-items: flex-start; }
-  .s-form--end {
-    justify-content: flex-end;
-    align-items: flex-end; }
-  .s-form--horizontal {
-    flex-direction: row; }
-    .s-form--horizontal > * + * {
-      margin-left: 1em; }
-  .s-form--vertical {
-    flex-direction: column; }
-    .s-form--vertical > * + * {
-      margin-top: 1em; }
-    .s-form--vertical .s-input-text__label {
-      min-width: calc(100% / 3);
-      display: block; }
 
 .s-text-area {
   display: flex;
@@ -146,6 +87,65 @@
       border-color: var(--primary-color, #2288ff);
       box-shadow: 0 0 0 var(--form-highlight-size, 0.2em) var(--form-highlight-color, rgba(34, 136, 255, 0.33));
       opacity: 1; }
+
+.s-input-text {
+  display: flex;
+  width: 100%;
+  max-width: 720px; }
+  .s-input-text--default {
+    flex-direction: row-reverse;
+    justify-content: flex-end; }
+  .s-input-text--stack {
+    flex-direction: column-reverse; }
+    .s-input-text--stack .s-input-text__label {
+      width: 100%;
+      padding: var(--form-padding, 0.5em) 0; }
+  .s-input-text__label {
+    padding: var(--form-padding, 0.5em);
+    font-size: var(--form-font-size, 1em); }
+  .s-input-text__control {
+    width: 100%;
+    border: none;
+    border: var(--form-border, 1px solid currentColor);
+    border-radius: var(--form-roundness, var(--roundness, 0.33em));
+    background-color: transparent;
+    font-size: var(--form-font-size, 1em);
+    color: var(--form-text-color);
+    padding: var(--form-padding, 0.5em);
+    transition: box-shadow var(--transition, 0.23s ease-in-out); }
+    .s-input-text__control:empty {
+      opacity: 0.5; }
+    .s-input-text__control:focus {
+      outline: none;
+      border-color: var(--primary-color, #2288ff);
+      box-shadow: 0 0 0 var(--form-highlight-size, 0.2em) var(--form-highlight-color, rgba(34, 136, 255, 0.33));
+      opacity: 1; }
+
+.s-form {
+  display: flex;
+  margin: auto;
+  width: 100%;
+  max-width: 720px; }
+  .s-form--center {
+    justify-content: center;
+    align-items: center; }
+  .s-form--start {
+    justify-content: flex-start;
+    align-items: flex-start; }
+  .s-form--end {
+    justify-content: flex-end;
+    align-items: flex-end; }
+  .s-form--horizontal {
+    flex-direction: row; }
+    .s-form--horizontal > * + * {
+      margin-left: 1em; }
+  .s-form--vertical {
+    flex-direction: column; }
+    .s-form--vertical > * + * {
+      margin-top: 1em; }
+    .s-form--vertical .s-input-text__label {
+      min-width: calc(100% / 3);
+      display: block; }
 
 .s-toggle {
   border-radius: var(--roundness, 0.33em); }

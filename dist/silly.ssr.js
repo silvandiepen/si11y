@@ -87,11 +87,11 @@ function _nonIterableRest() {
     },
     color: {
       type: String,
-      default: false
+      default: ""
     },
     icon: {
       type: String,
-      default: false
+      default: ""
     }
   },
   setup: function setup(props) {
