@@ -41,7 +41,7 @@
 	</section>
 	<section>
 		<h4>TextArea</h4>
-		<s-text-area v-model="input1" label="jeeej" />
+		<s-text-area v-model="text1" label="jeeej" />
 	</section>
 </template>
 <script>
@@ -51,10 +51,12 @@ export default defineComponent({
 		const input1 = ref('test');
 		const input2 = ref('test');
 		const input3 = ref('test');
+		const text1 = ref('test');
 		return {
 			input1,
 			input2,
-			input3
+			input3,
+			text1
 		};
 	}
 });

@@ -11,15 +11,15 @@
 	>
 		<component
 			:is="elementType"
-			class="s-text-area__control"
+			class="s-input-text__control"
 			@focus="onFocus"
 			@blur="onBlur"
 			@input="updateValue($event.target.value)"
 			:id="uid"
 			:placeholder="props.label"
-			:value="currentValue"
 			:required="required"
-		></component>
+			>{{ currentValue }}</component
+		>
 		<label :for="uid" v-if="props.label" class="s-text-area__label">{{
 			label
 		}}</label>
