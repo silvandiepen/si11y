@@ -45,6 +45,7 @@
 		"rollup-plugin-sass": "^1.2.2",
 		"rollup-plugin-terser": "^7.0.0",
 		"rollup-plugin-vue": "^6.0.0-beta.10",
+		"sass": "^1.27.0",
 		"stylelint": "^13.7.2",
 		"stylelint-logical-order": "^0.1.0",
 		"stylelint-order": "^4.1.0",
@@ -57,5 +58,6 @@
 	},
 	"engines": {
 		"node": ">=10"
-	}
+	},
+	"dependencies": {}
 }

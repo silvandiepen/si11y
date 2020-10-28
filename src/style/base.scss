@@ -5,7 +5,6 @@ html,
 body {
 	width: 100%;
 	min-height: 100vh;
-	font-family: $s-font-family;
 	margin: 0;
 	padding: 0;
 }
@@ -13,6 +12,7 @@ html {
 	background-color: var(--html-background);
 }
 body {
+	font-family: $s-font-family;
 	background-color: var(--body-background);
 	color: var(--body-text-color);
 	transition: background-color 0.2s;

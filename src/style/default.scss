@@ -1,20 +1,49 @@
-$s-roundness: 0.33em !default;
-$s-padding: 1em !default;
+$base-colors: (
+	'primary': #2288ff
+);
 
-$s-primary-color: #2288ff !default;
-$s-primary-color-text: white !default;
-$s-primary-color-highlight: rgba($s-primary-color, 0.33);
+$defaults: (
+	'roundness': 0.33em,
+	'padding': 1em,
+	'primary-color': map-get($base-colors, 'primary'),
+	'primary-color-text': white,
+	'primary-color-highlight': rgba(map-get($base-colors, 'primary'), 0.33),
+	'font-family':
+		"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+	'form': (
+		'padding': 0.5em,
+		'font-size': 1em,
+		'border': 1px solid currentColor,
+		'roundness': 0.33em,
+		'highlight-color': rgba(map-get($base-colors, 'primary'), 0.33),
+		'highlight-size': 0.2em
+	),
+	'transition': (
+		'time': 0.23s,
+		'bezier': ease-in-out
+	)
+);
 
-$s-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-	Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+$s-roundness: map-get($defaults, 'roundness') !default;
+$s-padding: map-get($defaults, 'padding') !default;
 
-$s-form-padding: 0.5em !default;
-$s-form-font-size: 1em !default;
-$s-form-border: 1px solid currentColor !default;
-$s-form-roundness: $s-roundness;
-$s-form-highlight-color: rgba($s-primary-color, 0.33);
-$s-form-highlight-size: 0.2em;
+$s-primary-color: map-get($defaults, 'primary-color') !default;
+$s-primary-color-text: map-get($defaults, 'primary-color-text') !default;
+$s-primary-color-highlight: map-get(
+	$defaults,
+	'primary-color-highlight'
+) !default;
 
-$s-transition-time: 0.23s !default;
-$s-transition-bezier: ease-in-out !default;
-$s-transition: $s-transition-time $s-transition-bezier !default;
+$s-font-family: unquote(map-get($defaults, 'font-family')) !default;
+
+$s-form-padding: map-get($defaults, 'form', 'padding') !default;
+$s-form-font-size: map-get($defaults, 'form', 'font-size') !default;
+$s-form-border: map-get($defaults, 'form', 'border') !default;
+$s-form-roundness: map-get($defaults, 'form', 'roundness') !default;
+$s-form-highlight-color: map-get($defaults, 'form', 'highlight-color') !default;
+$s-form-highlight-size: map-get($defaults, ' form', 'highlight-size') !default;
+
+$s-transition-time: map-get($defaults, 'transition,' 'time') !default;
+$s-transition-bezier: map-get($defaults, ' transition', 'bezier') !default;
+$s-transition: map-get($defaults, 'transition', 'time')
+	map-get($defaults, 'transition', 'bezier') !default;
